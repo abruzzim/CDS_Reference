@@ -1,0 +1,903 @@
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+@nightBackground: #231F20;
+@dayBackground: #ffffff;
+
+@nightBackgroundSecondary: #404041;
+@dayBackgroundSecondary: #ffffff;
+
+@nightFont: #ffffff;
+@dayFont: #000000;
+
+@font: Helvetica;
+@lightBlue: #26A9E0;
+
+@dayBorderColor: #BBBDBF;
+
+// Prevent page from scrolling
+html,body
+{
+    width:100%;
+    height:100%;
+    margin: 0;
+    background-color: @nightBackground;
+}
+
+
+body, .pseudoSlide
+{
+    font-family: @font;
+
+    .invertible.night
+    {
+        background: @nightBackground;
+        background-color: @nightBackground;
+    }
+
+    .invertible.day
+    {
+        background: @dayBackground;
+        background-color: @dayBackground;
+    }
+}
+
+// This is formatting for everything that's not in the protocol
+.pseudoSlide
+{
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    width:95%
+}
+
+.pseudoSlide ul
+{
+    margin-left: 0px;
+}
+
+.reveal p, p, .reveal li, li
+{
+    font-size: 32px;
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+
+@media only screen and (orientation:landscape)
+{
+    .reveal p, p, .reveal li, li
+    {
+        line-height: 32px;
+    }
+}
+
+.reveal p.invertible.night, .reveal li.invertible.night,
+p.invertible.night, li.invertible.night,
+{
+    color:@nightFont;
+}
+
+.reveal p.invertible.day, .reveal li.invertible.day,
+p.invertible.day, li.invertible.day
+{
+    color: @dayFont;
+}
+
+::selection
+{
+    color: white;
+    background: rgba(0, 0, 0, 0.99);
+    text-shadow: none;
+}
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.allHeaders
+{
+    font-family: Helvetica;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    hyphens: none;
+}
+
+.primaryHeader (@size:58px)
+{
+    margin-bottom: 15px;
+    margin-top: 0px;
+    color: @lightBlue;
+    font-size: @size;
+    line-height: @size;
+    font-weight: bold;
+    .allHeaders;
+}
+
+.secondaryHeader(@font,@size:38px,@padding:10px)
+{
+    color:@font;
+    padding: @padding 0px;
+    font-size: @size;
+    line-height:@size;
+    .allHeaders;
+}
+
+.navbar-header
+{
+    padding-top: 20px;
+}
+
+.reveal h1, h1
+{
+    .primaryHeader();
+}
+
+.reveal h2, h2
+{
+    .primaryHeader(48px);
+}
+
+.reveal h3.invertible.night, h3.invertible.night
+{
+    .secondaryHeader(@nightFont);
+}
+
+.reveal h3.invertible.day, h3.invertible.day
+{
+    .secondaryHeader(@dayFont);
+}
+
+.reveal h4.invertible.night, h4.invertible.night
+{
+    .secondaryHeader(@nightFont, 28px);
+}
+
+.reveal h4.invertible.day, h4.invertible.day
+{
+    .secondaryHeader(@dayFont, 28px);
+}
+
+@media only screen and (orientation:landscape)
+{
+    .reveal h3.invertible.night, h3.invertible.night
+    {
+        .secondaryHeader(@nightFont,38px, 5px);
+    }
+
+    .reveal h3.invertible.day, h3.invertible.day
+    {
+        .secondaryHeader(@dayFont,38px, 5px);
+    }
+
+    .reveal h4.invertible.night, h4.invertible.night
+    {
+        .secondaryHeader(@nightFont, 28px, 5px);
+    }
+
+    .reveal h4.invertible.day, h4.invertible.day
+    {
+        .secondaryHeader(@dayFont, 28px, 5px);
+    }
+}
+
+
+/*********************************************
+ * HEADER BAR
+ *********************************************/
+.headerBar, .headerBar-inner
+{
+    background-color: @nightBackgroundSecondary;
+    background-image: none;
+    height:85px;
+}
+
+.headerBar-inner
+{
+    padding: 0 30;
+
+    h1
+    {
+        font-size: 60px;
+        padding-top: 10px;
+    }
+}
+
+.headerBar-header
+{
+    border-radius: 15px;
+    background-color: #000;
+    height: 100%;
+}
+
+.header-image
+{
+    padding: 10 20;
+}
+
+.header-table
+{
+    margin-top: 5px;
+}
+
+.header-table-btn
+{
+    padding: 3px;
+    cursor: pointer;
+}
+
+.sub-table td
+{
+    font-size: 21px;
+    font-weight: bold;
+    color: @nightBackgroundSecondary;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.sub-table td.mini
+{
+    font-size: 16px;
+}
+
+.tablePast td.inactive,
+.tableFuture td.inactive
+{
+    color:#000;
+}
+
+.tablePresent td.inactive
+{
+    color:@lightBlue;
+}
+
+.timer-table td.tiny
+{
+    font-size: 11px;
+    font-weight: bold;
+    color: @dayBackground;
+    padding-left: 17px;
+}
+
+.tablePresent td
+{
+    color: @dayBackground;
+    background: @lightBlue;
+}
+
+.tablePast
+{
+    border-left-color: #404041;
+    border-left-width: 3px;
+    border-left-style: solid;
+}
+
+
+/*********************************************
+ * LINKS
+ *********************************************/
+.reveal
+{
+    a:not(.image), a:not(.image):hover
+    {
+        font-style:italic;
+        text-decoration:underline;
+        cursor: pointer;
+    }
+
+    a:not(.image).invertible.night, a:not(.image):hover.invertible.night
+    {
+        color:@nightFont;
+    }
+
+
+
+    a:not(.image).invertible.day, a:not(.image):hover.invertible.day
+    {
+        color:@dayFont;
+    }
+}
+
+.reveal .arrow
+{
+    padding-left: 10px;
+}
+
+
+/*********************************************
+ * BUTTONS
+ *********************************************/
+.reveal .regBtn, .regBtn
+{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: @lightBlue;
+    font-size: 48px;
+    font-family: Helvetica;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 15px;
+    margin: 10px;
+    width:auto;
+    display: block;
+    background-color: @nightBackgroundSecondary;
+}
+
+.reveal .regBtn.invertible.night, .regBtn.invertible.night
+{
+
+        background-color: @nightBackgroundSecondary;
+}
+
+.reveal .regBtn.invertible.day, .regBtn.invertible.day
+{
+        background-color: @dayBackgroundSecondary;
+        border: solid 3px @dayBorderColor;
+}                     
+
+
+.reveal .regBtn:hover, .regBtn:hover
+{
+    cursor: pointer;
+}
+
+#okBtn
+{
+    width:30%;
+    margin-left: 35%;
+    background-color: @lightBlue;
+    color: #ffffff;
+    border: 0;
+}
+
+@media only screen and (orientation:landscape)
+{
+    #okBtn
+    {
+        margin-left: 40%;
+        margin-top: 50px;
+    }
+}
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls div.navigate-left,
+.reveal .controls div.navigate-left.enabled
+{
+    border-right-color: @lightBlue;
+}
+
+.reveal .controls div.navigate-right,
+.reveal .controls div.navigate-right.enabled
+{
+    border-left-color: @lightBlue;
+}
+
+.reveal .controls div.navigate-up,
+.reveal .controls div.navigate-up.enabled
+{
+    border-bottom-color: @lightBlue;
+}
+
+.reveal .controls div.navigate-down,
+.reveal .controls div.navigate-down.enabled
+{
+    border-top-color: @lightBlue;
+}
+
+.reveal .controls div.navigate-left.enabled:hover
+{
+    border-right-color: @lightBlue;
+}
+
+.reveal .controls div.navigate-right.enabled:hover
+{
+    border-left-color: @lightBlue;
+}
+
+.reveal .controls div.navigate-up.enabled:hover
+{
+    border-bottom-color: @lightBlue;
+}
+
+.reveal .controls div.navigate-down.enabled:hover
+{
+    border-top-color: @lightBlue;
+}
+
+/*********************************************
+ * START PAGE
+ *********************************************/
+.reveal
+{
+    .startBtn
+    {
+        border-radius: 15px;
+        margin-left: 12%;
+        margin-top: 40%;
+        width: 75%;
+        height: 180px;
+        display: block;
+    }
+
+    @media only screen and (orientation:landscape)
+    {
+        .startBtn
+        {
+            margin-top: 23%;
+        }
+    }
+
+    .startBtn.invertible.night
+    {
+        background-color: @nightBackgroundSecondary;
+    }
+
+    .startBtn.invertible.day
+    {
+        background-color: @dayBackgroundSecondary;
+        border: solid 3px @dayBorderColor;
+    }
+
+    .startBtn:hover
+    {
+        cursor: pointer;
+    }
+
+    .startImg
+    {
+        display: inline;
+        padding-top: 57px;
+        padding-right: 35px;
+    }
+
+    .startText
+    {
+        display: inline;
+        padding-top: 80px;
+        padding-left: 80px;
+        color: @lightBlue;
+        font-size: 48px;
+        font-family: Helvetica;
+        font-weight: bold;
+    }
+
+}
+
+@media only screen and (orientation:landscape)
+{
+    .reveal .startText
+    {
+        padding-left: 180px;
+    }
+}
+
+/*********************************************
+ * TIMERS
+ *********************************************/
+// Time Headers
+.reveal .timerHeader, .timerHeader
+{
+    .allHeaders;
+    font-weight: bold;
+    font-size: 28px;
+    color: @lightBlue;
+    display: block;
+}
+
+// Timer timers
+.reveal .timerTime, .timerTime
+{
+    .allHeaders;
+    font-weight: bold;
+    font-size: 68px;
+    color: @nightFont;
+    float:left;
+}
+
+.reveal
+{
+    .timerTime.invertible.night
+    {
+        color: @nightFont;
+    }
+
+    .timerTime.invertible.day
+    {
+        color: @dayFont;
+    }
+}
+
+// Positioning the bottom left timer
+.reveal .transportTimeAside
+{
+    position: fixed;
+    bottom: 10px;
+    padding: 0 0 20px 30px;
+}
+
+// Overwriting default styling of jquery countdown
+.reveal .hasCountdown, .hasCountdown
+{
+    background-color: transparent;
+    border: none;
+}
+.countdown_amount
+{
+    font-size: 100%;
+}
+
+.headerBar-header .timerTime
+{
+    padding-top: 31px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: @lightBlue;
+}
+
+/*********************************************
+ * SLIDES
+ *********************************************/
+.reveal .slides
+{
+    text-align:left;
+    left: 0%;
+    top: 0%;
+    width: 95%;
+    max-width: 95%
+}
+
+.reveal .slides>section,
+.reveal .slides>section>section,
+{
+    padding:0px;
+    left: 20px;
+    top: 5px;
+}
+
+/*********************************************
+ * MODAL
+ *********************************************/
+.modal
+{
+    background: @nightBackground;
+    background-color: @nightBackground;
+    font-family: @font;
+    color: @nightFont;
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: bold;
+
+
+    table th, table td
+    {
+        color: @nightFont;
+        text-shadow: none;
+    }
+
+    .modal-header
+    {
+        padding: 10px 15px 0px 10px;
+        border-bottom: none;
+    }
+
+    .modal-header h3
+    {
+        .primaryHeader(35px);
+        margin-top: 7px;
+    }
+
+    img
+    {
+        float:right;
+        padding-top: 5px;
+        cursor: pointer;
+    }
+
+    .control-label
+    {
+        width: 300px;
+        font-size: 28px;
+        line-height: 28px;
+    }
+
+    .modalInput
+    {
+        font-size: 25px;
+        line-height: 25px;
+        height: 36px;
+        margin-left: 20px;
+    }
+
+    .red
+    {
+        color:red;
+    }
+
+    .calculateBtnsDiv
+    {
+        padding-left: 15%
+    }
+
+    .calcBtn
+    {
+        font-size: 35px;
+        margin-bottom: 5%;
+    }
+}
+
+img.modalLaunch
+{
+    margin-top: -5px;
+    vertical-align: middle;
+}
+
+img.modalLaunch.left
+{
+    padding-right: 10px;
+}
+
+img.modalLaunch.right
+{
+    padding-left: 10px;
+}
+
+/*********************************************
+ * PATIENT CARE FORM TABLES
+ *********************************************/
+.pseudoSlide
+{
+    div, div label,  div input
+    {
+        font-size: 28px;
+        line-height: 28px;
+    }
+
+
+    div.day, div label.day
+    {
+        color: @dayFont;
+    }
+
+
+    div.night, div label.night
+    {
+        color: @nightFont
+    }
+
+    div input
+    {
+        height: 36px;
+    }
+
+    div input.day
+    {
+        color:@dayFont;
+    }
+
+    div
+    {
+        input[type='text'], textarea, select
+        {
+            width: 95%;
+        }
+    }
+
+    .row-fluid
+    {
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (orientation:portrait)
+{
+    .pseudoSlide .smallFormText
+    {
+        font-size: 24px;
+    }
+}
+
+/*********************************************
+ * MISC
+ *********************************************/
+// Images such as "Warning" and "Info"
+.reveal .infoImg
+{
+    margin: 0 10 -10 0;
+}
+
+// Give something a high z-index
+.highZ
+{
+    position: relative;
+    z-index: 100;
+}
+
+
+// Get rid of bullet point in a list item
+li
+{
+    list-style-type: none;
+}
+
+.pointer
+{
+    cursor: pointer;
+}
+
+.doNotMissBar
+{
+    background: #ED1C24;
+    background-color: #ED1C24;
+}
+
+.doNotMissHeader
+{
+    margin: 0;
+    .primaryHeader();
+    color:white;
+    padding-top: 35px;
+    padding-left: 35px;
+}
+
+.invertible.expandable
+{
+    font-style:italic;
+    text-decoration:underline;
+    cursor: pointer;
+}
+
+.reveal .collapsibleIcon, .collapsibleIcon
+{
+    margin-left: 15px;
+}
+
+.backToTop
+{
+    display: block;
+    width: 61px;
+    height: 42px;
+    position: fixed;
+    right: 130px;
+    bottom: 35px;
+    z-index: 30;
+}
+
+.backToTop img
+{
+    max-height: 50%;
+    max-width: 50%;
+}
+
+.backToTopTip
+{
+    width: 30.5px;
+    height: 21px;
+    padding-right: 10px;
+    vertical-align: middle;
+    margin-top: -5px;
+}
+
+iframe
+{
+    height:100%;
+    width:100%;
+    border: transparent;
+}
+
+.dropdown-menu
+{
+    li
+    {
+        margin: 0;
+
+        a
+        {
+            font-size: 28px;
+            line-height: 28px;
+        }
+    }
+
+
+}
+
+sup
+{
+    top: -0.1em;
+}
+
+.reveal .bulletList
+{
+    padding-left: 30px;
+}
+
+.bullet
+{
+    list-style-type: disc;
+}
+
+.center
+{
+    text-align: center;
+}
+
+input[type="datetime-local"]
+{
+    width:95%;
+}
+
+#hideRemember:hover
+{
+    color: #005580;
+}
+
+#hideRemember
+{
+    display: inline;
+    color: #08c;
+}
+
+.face0, .face2, .face4, .face6, .face8, .face10, .btn_day_sm, .btn_night_sm, .icon_close, .icon_open{
+    background: url(assets/sprites.png) no-repeat;
+}
+
+.face0{
+    background-position: 0 0;
+    width: 92px;
+    height: 92px;
+}
+
+.face2{
+    background-position: -100px 0;
+    width: 92px;
+    height: 92px;
+}
+
+.face4{
+    background-position: -200px 0;
+    width: 92px;
+    height: 92px;
+}
+
+.face6{
+    background-position: -300px 0;
+    width: 92px;
+    height: 92px;
+}
+
+.face8{
+    background-position: -400px 0;
+    width: 92px;
+    height: 92px;
+}
+
+.face10{
+    background-position: -500px 0;
+    width: 92px;
+    height: 92px;
+}
+
+.btn_day_sm{
+    background-position: 0 -100px ;
+    width: 52px;
+    height: 52px;
+}
+
+.btn_night_sm{
+    background-position: -100px -100px ;
+    width: 52px;
+    height: 52px;
+}
+
+.icon_close{
+    background-position: -600px -50px ;
+    width: 26px;
+    height: 25px;
+}
+
+.icon_open{
+    background-position: -600px 0;
+    width: 26px;
+    height: 25px;
+}
+

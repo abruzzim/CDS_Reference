@@ -1,0 +1,455 @@
+<html lang="en">
+    <head>
+        <title>Sepsis Protocol</title>
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./revealjs/css/reveal.css">
+		<link rel="stylesheet" href="./countdown/jquery.countdown.css" />
+        <link rel="stylesheet" href="../../CHO/emotive.css">
+        <script type="text/javascript" src="../../libV2/ncdf.js"></script>
+        <script type="text/javascript" src="fastclick/fastclick.min.js"></script>
+        <script type="text/javascript" src="./source.js"></script>
+    </head>
+
+    <body class="invertible">
+        <!-- Header bar -->
+        <div class="headerBar showInProtocol highZ" style="display:none">
+		    <div class="headerBar-inner">
+                <table class="pull-left header-table">
+                    <tr>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="home" src="./assets/btn_home_on.png"/></td>
+                        <td class="pointer" onclick="toggleColors()"><img class="header-table-btn-padding sunMoon" src="./assets/btn_night.png"/></td>
+                    </tr>
+                    <tr>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="pdf" src="./assets/btn_pdf.png"/></td>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="help" src="./assets/btn_help.png"/></td>
+                    </tr>
+                </table>
+                <div class="pull-right headerBar-header"><span id="countdown" class="timerTime"></span>
+                    <table class="timer-table">
+                        <tr>
+                            <td>
+                                <table class="tablePast sub-table">
+                                    <tr>
+                                        <td id="VSPast" class="mini" style="display:none;">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="IVFPast" class="mini" style="display:none;">IVF</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="LabsPast" class="mini" style="display:none;">Labs</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="AbxPast" class="mini" style="display:none;">Abx</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="PressPast" class="mini" style="display:none;">Press</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="HCPast" class="mini" style="display:none;">HC</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="PBRCPast" class="mini" style="display:none;">PBRC</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Past</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="tablePresent sub-table">
+                                    <tr>
+                                        <td id="VSPresent" class="mini">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="IVFPresent" class="mini">IVF</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="LabsPresent" class="mini">Labs</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="AbxPresent" class="mini" style="display:none;">Abx</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="PressPresent" class="mini" style="display:none;">Press</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="HCPresent" class="mini" style="display:none;">HC</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="PBRCPresent" class="mini" style="display:none;">PBRC</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">NULL</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">NULL</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Present</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="tableFuture sub-table">
+                                    <tr>
+                                        <td id="VSFuture" class="mini">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="IVFFuture" class="mini">IVF</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="LabsFuture" class="mini" style="display:none;">Labs</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="AbxFuture" class="mini">Abx</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="PressFuture" class="mini">Press</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="HCFuture" class="mini" style="display:none;">HC</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="PBRCFuture" class="mini" style="display:none;">PBRC</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">NULL</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Future</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+		</div>
+        <div class="headerBar showInDoNotMiss" style="display:none">
+            <div class="headerBar-inner doNotMissBar">
+                <h1 class="doNotMissHeader">Do Not Miss!</h1>
+            </div>
+        </div>
+        <!-- Slides -->
+        <div class="reveal invertible home">
+            <!-- Any section element inside of this div is displayed as a slide -->
+            <div class="slides">
+                <!--0-->
+                <section class="present noHeader">
+                    <div class="startPage">
+                        <div class="startBtn invertible slideJump" data-horizontal="1" data-vertical="0">
+                            <div class="pull-left startText">Start New Protocol</div>
+                            <div class="pull-right startImg"><img src="assets/arrow.png"/></div>
+                        </div>
+                        <div id="resumeProtocol" class="startBtn invertible">
+                            <div class="pull-left startText">Resume Protocol</div>
+                            <div class="pull-right startImg"><img src="assets/arrow.png"/></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--1-->
+                <section>
+                    <div class="doNotMiss">
+                        <ul>
+                            <li class="invertible">Rapid Sepsis Assessment Tool<img src="./assets/icon_comascale.png" class="modalLaunch vitalsModalLaunch pointer right"/></li>
+                            <li class="invertible">Initially, pediatric patients present with:</li>
+                            <ul>
+                                <li class="invertible">Low or high temperature</li>
+                                <li class="invertible">Tachycardia</li>
+                                <li class="invertible">Altered mental status</li>
+                                <li class="invertible">Poor perfusion or FLASH capillary refill</li>
+                            </ul>
+                            <li class="invertible">Hypotension is LATE FINDING!</li>
+                            <li class="invertible"><div id="okBtn" class="regBtn invertible slideJump" data-horizontal="2" data-vertical="0">OK</div></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!--2-->
+                <section>
+
+                    <section>
+                        <h1>Time Zero Overview</h1>
+                        <h4 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="1">Evaluate extent of shock / end organ dysfunction! (CNS, perfusion, UOP, etc.)<img class="arrow" src="assets/downarrow.png"/></a></h4>
+                        <h4 class="invertible">Assess breathing. Place oxygen on all patients - min. 2 L NC to keep Sp02 &gt; 94%!</h4>
+                        <h4 class="invertible">Initiate IV access</h4>
+                        <ul class="bulletList">
+                            <li class="bullet invertible"><h4 class="invertible">2 if possible</h4></li>
+                            <li class="bullet invertible"><h4 class="invertible">Have IO available</h4></li>
+                            <li class="bullet invertible"><h4 class="invertible">Use Broviac/Central line if already in place</h4></li>
+                        </ul>
+                        <h4 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="2">Draw labs<img class="arrow" src="assets/downarrow.png"/></a></h4>
+                    </section>
+
+                    <section>
+                        <h2>Pediatric Severe Sepsis/Septic Shock Assessment</h2>
+                        <ul>
+                            <li class="invertible">Rapid Sepsis Assessment Tool<img src="./assets/icon_comascale.png" class="modalLaunch vitalsModalLaunch pointer right"/></li>
+                            <li class="invertible">Initially, pediatric patients present with:</li>
+                            <ul>
+                                <li class="invertible">Low or high temperature</li>
+                                <li class="invertible">Tachycardia</li>
+                                <li class="invertible">Altered mental status</li>
+                                <li class="invertible">Poor perfusion or FLASH capillary refill</li>
+                            </ul>
+                            <li class="invertible">Hypotension is LATE FINDING!</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Lab testing</h1>
+                        <ul>
+                            <li class="invertible">POC tests-blood gas, glucose, lytes, lactate<sup>*</sup></li>
+                            <li class="invertible">CBC, chem 8</li>
+                            <li class="invertible">Cultures: Blood, ETT if intubated (Consider Cath Urine and CSF if hemodynamics OK)</li>
+                            <li class="invertible">(NB. Do not delay transport for LP)</li>
+                            <li class="invertible"><sup>*</sup>Capillary, venous, arterial OK, preferably not IO</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--3-->
+                <section>
+
+                    <section>
+                        <h1>0-15 Minutes Overview</h1>
+                        <h3 class="invertible">If no IV access by 5 minutes, place IO!</h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="1">PUSH IV fluids<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="2">Assess point of care results<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <ul>
+                            <li class="invertible">Treat hypoglycemia and hypocalcemia</li>
+                        </ul>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="3">Order antibiotics and give ASAP<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <ul>
+                            <li class="invertible">Goal: First doses IN by 30 minutes!</li>
+                        </ul>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="4">Order Inotropes/Vasopressors to bedside<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                    </section>
+
+                    <section>
+                        <h1>Fluids</h1>
+                        <ul>
+                            <li class="invertible">NS, Plasmalyte, LR or 5% albumin <i>by hand</i> over 5 minutes, not on a pump</li>
+                            <li class="invertible">Start with 20 ml/kg IV</li>
+                            <li class="invertible">Repeat until perfusion improves unless rales or hepatomegaly develop</li>
+                            <li class="invertible">Assess liver margin before and after each NS bolus</li>
+                            <li class="invertible"><img class="infoImg info" src="assets/icon_info_dark.png"/>Likely will need at least 60 mL/kg and may need up to 100 mL/kg!</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Assessment of Labs</h1>
+                        <ul>
+                            <li class="invertible expandable">If ionized Ca &lt; 1<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display:none">
+                                <li class="invertible">Calcium Chloride 10 mg/kg IV over 5-15 min. May repeat x 1</li>
+                                <li class="invertible">If no CaCl, use Calcium Gluconate 50 mg/kg IV over 5-15 min. May repeat x 1</li>
+                                <li class="invertible">Watch CLOSELY for extravasation!!</li>
+                            </ul>
+                            <li class="invertible">If pH &lt; 7.0, consider NaHCO3 1 mEq/kg. May repeat x 1</li>
+                            <li class="invertible expandable">If glucose &lt; 40 or seizing from hypoglycemia<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display:none">
+                                <li class="invertible">4 mL/kg D10W IVP OR</li>
+                                <li class="invertible">1 mL/kg D50W IVP (watch IV site CLOSELY)</li>
+                                <li class="invertible">Repeat POC glucose in 15 min and again in 60 min!</li>
+                            </ul>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Antibiotics for Severe Sepsis/Septic Shock</h2>
+                        <ul>
+                            <li class="invertible">Age 0-28 days: Ampicillin 50 mg/kg IVP and Cefotaxime 50 mg/kg IVP</li>
+                            <li class="invertible">&gt; 28 days: Ceftriaxone 50mg/kg IVP or IM</li>
+                            <li class="invertible">(Consider Vancomycin 15 mg/kg IV over 30 minutes for presumed Staph aureus. Discuss with PICU physician if able.)</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Inotropes/Vasopressors</h2>
+                        <ul>
+                            <li class="invertible">Use if BP low despite fluid resuscitation (at least 60 mL/kg) or evidence of hepatomegaly or resp distress</li>
+                            <li class="invertible">Place second IV if able</li>
+                            <li class="invertible">MAY give inotropes/vasopressors through PIV or IO</li>
+                            <li class="invertible">Choices:</li>
+                            <ul>
+                                <li class="invertible">1. Dopamine 5-20 mcg/kg/min, esp for use in PIV</li>
+                                <li class="invertible">2. Epinephrine 0.1-0.3 mcg/kg/min (if cold extremities) OR</li>
+                                <li class="invertible">Norepinephrine 0.1-0.3 mcg/kg/min (if warm extremities)</li>
+                            </ul>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--4-->
+                <section>
+
+                    <section>
+                        <h1>15-60 Minutes Overview</h1>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="1">REASSESS!<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="3">Consider hydrocortisone for potential adrenal insufficiency!<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible">Reconsider need for inotropes/vasopressors if not already being given.</h3>
+                    </section>
+
+                    <section>
+                        <h1>Items to Reassess</h1>
+                        <ul>
+                            <li class="invertible">Have appropriate cultures have been drawn? (min. 1 mL for blood cultures)</li>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="2">Have antibiotics been given?<img class="arrow" src="assets/downarrow.png"/></a></li>
+                            <li class="invertible">Sufficient fluid resuscitation given?</li>
+                            <ul>
+                                <li class="invertible">Children often need 80 mL/kg - 100 mL/kg for sepsis</li>
+                            </ul>
+                            <li class="invertible">Reassess CNS and respiratory status!</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Antibiotics for Severe Sepsis/Septic Shock</h2>
+                        <ul>
+                            <li class="invertible">Age 0-28 days: Ampicillin 50 mg/kg IVP and Cefotaxime 50 mg/kg IVP</li>
+                            <li class="invertible">&gt; 28 days: Ceftriaxone 50mg/kg IVP or IM</li>
+                            <li class="invertible">(Consider Vancomycin 15 mg/kg IV over 30 minutes for presumed Staph aureus. Discuss with PICU physician if able.)</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Hydrocortisone for adrenal insufficiency<sup>*</sup></h2>
+                        <ul>
+                            <li class="invertible">Slow IV push</li>
+                            <ul>
+                                <li class="invertible">25 mg IV under 6 months</li>
+                                <li class="invertible">50 mg IV up to 9 years</li>
+                                <li class="invertible">100 mg IV if 10 years or older</li>
+                            </ul>
+                            <li class="invertible"><sup>*</sup>Indicated if patient has already received MULTIPLE fluid boluses AND inotropes/vasopressors AND is still hypotensive. OR if purpura fulminans</li>
+                        </ul>
+                    </section>
+
+                </section>
+
+                <!--5-->
+                <section>
+
+                    <section>
+                        <h1>1-4 Hours</h1>
+                        <ul>
+                            <li class="invertible">If BP still low, HR still high or still on inotropes, call PICU MD and consider:</li>
+                            <ul>
+                                <li class="invertible">Repeat fluid bolus (up to 200 mL/kg)</li>
+                                <li class="invertible">Increase dopamine/epi</li>
+                                <li class="invertible">Add norepinephrine or vasopressin</li>
+                                <li class="invertible">Blood transfusion (10-20 mL/kg)</li>
+                                <ul>
+                                    <li class="invertible">1 unit = 250-300 mL</li>
+                                    <li class="invertible">O neg if emergency</li>
+                                </ul>
+                                <li class="invertible"><a class="slideJump invertible" data-horizontal="5" data-vertical="1">Other important things!<img class="arrow" src="assets/downarrow.png"/></a></li>
+                            </ul>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Other important things!</h1>
+                        <ul>
+                            <li class="invertible">Resp status</li>
+                            <ul>
+                                <li class="invertible">? Need CXR</li>
+                                <li class="invertible">Look for pulm edema/resp distress</li>
+                                <li class="invertible">May need intubation - call PICU MD</li>
+                            </ul>
+                            <li class="invertible">Pericardial effusion, pneumothorax, increased abd pressure - If so, call PICU MD</li>
+                            <li class="invertible">Need for central access</li>
+                            <li class="invertible">Repeat labs (POC blood gas with lytes, Glu, and Hgb)</li>
+                        </ul>
+                    </section>
+                </section>
+
+            </div>
+
+            <!--Transport time-->
+            <aside class="transportTimeAside showInProtocol" style="display:none">
+                <span class="timerHeader">Elapsed Transport Time </span><span id="elapsed" class="timerTime invertible"></span>
+            </aside>
+
+            <!--Navigation Arrows-->
+            <aside class="showInProtocol backToTop" style="display:none;">
+                <img class="pointer" src="./assets/icon_backtotop.png"/>
+            </aside>
+
+            <!--Navigation Arrows-->
+            <aside id="controls" class="controls showInProtocol" style="display:none;">
+	            <div class="navigate-left"></div>
+	            <div class="navigate-right"></div>
+	            <div class="navigate-up"></div>
+	            <div class="navigate-down"></div>
+            </aside>
+        </div>
+
+        <!--Age adjusted Vital Sign Table Modal Lookup-->
+        <div id="lookupModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="./assets/table_sepsis.png">
+                </div>
+            </div>
+        </div>
+
+        <!--PDF View-->
+        <div class="pdf invertible" style="display:none;">
+            <div class="pseudoSlide pdf">
+                <iframe src="../../CHO/sepsisProtocol.pdf"></iframe>
+            </div>
+        </div>
+
+        <!--Help View-->
+        <div class="help invertible" style="display:none">
+            <div class="pseudoSlide">
+                <h1>Help</h1>
+                <h2>Glossary</h2>
+                <ul>
+                    <li class="invertible">VS: Vital Signs</li>
+                    <li class="invertible">IVF: Intravenous fluids/fluid bolus</li>
+                    <li class="invertible">Labs: Lab tests</li>
+                    <li class="invertible">Abx: Antibiotics</li>
+                    <li class="invertible">Press: Vasopressors</li>
+                    <li class="invertible">HC: Hydrocortisone</li>
+                    <li class="invertible">PBRC: Blood transfusion</li>
+                </ul>
+                <h2>Tips</h2>
+                <ul>
+                    <li class="invertible">Pressing the "Home" button takes you back to where you were in the algorithm, NOT to the beginning</li>
+                    <li class="invertible"><img src="./assets/icon_comascale.png" class="modalLaunch vitalsModalLaunch pointer left"/>Touching this icon will bring up an age adjusted vital signs table</li>
+                    <li class="invertible"><img src="./assets/icon_backtotop.png" class="backToTopTip"/>Touching this icon will take you to the top of the column you are currently in</li>
+                    <li class="invertible">Tap the arrows in the lower right corner of the protocol view to move around the pages. Illuminated arrows mean you can touch them to switch pages</li>
+                    <li class="invertible">When you are in the protocol view, you can pinch two fingers towards each other to show an overview of the pages. From there, you can tap the page you want to jump to</li>
+                    <li class="invertible">If you are viewing the PDF in landscape mode, you can use two fingers to scroll through it</li>
+                </ul>
+            </div>
+        </div>
+
+        <!--JS declaration-->
+        <script type="text/javascript" src="./revealjs/js/reveal.js"></script>
+        <script type="text/javascript" src="./countdown/jquery.countdown.js"></script>
+        <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>

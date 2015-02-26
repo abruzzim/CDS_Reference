@@ -1,0 +1,541 @@
+<html lang="en">
+    <head>
+        <title>TBI Protocol</title>
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./revealjs/css/reveal.css">
+		<link rel="stylesheet" href="./countdown/jquery.countdown.css" />
+        <link rel="stylesheet" href="../../CHO/emotive.css">
+        <script type="text/javascript" src="../../libV2/ncdf.js"></script>
+        <script type="text/javascript" src="fastclick/fastclick.min.js"></script>
+        <script type="text/javascript" src="./source.js"></script>
+    </head>
+
+    <body class="invertible">
+        <!-- Header bar -->
+        <div class="headerBar showInProtocol highZ" style="display:none">
+		    <div class="headerBar-inner">
+                <table class="pull-left header-table">
+                    <tr>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="home" src="./assets/btn_home_on.png"/></td>
+                        <td class="pointer" onclick="toggleColors()"><img class="header-table-btn-padding sunMoon" src="./assets/btn_night.png"/></td>
+                    </tr>
+                    <tr>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="pdf" src="./assets/btn_pdf.png"/></td>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="help" src="./assets/btn_help.png"/></td>
+                    </tr>
+                </table>
+                <div class="pull-right headerBar-header"><span id="countdown" class="timerTime"></span>
+                    <table class="timer-table">
+                        <tr>
+                            <td>
+                                <table class="tablePast sub-table">
+                                    <tr>
+                                        <td id="VSPast" class="inactive">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuPast" class="inactive">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GluPast" class="inactive">Glu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NaPast" class="inactive">Na</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Past</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="tablePresent sub-table">
+                                    <tr>
+                                        <td id="VSPresent">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuPresent">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GluPresent">Glu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NaPresent">Na</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Present</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="tableFuture sub-table">
+                                    <tr>
+                                        <td id="VSFuture">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuFuture">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GluFuture" class="inactive">Glu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NaFuture" class="inactive">Na</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Future</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+		</div>
+        <div class="headerBar showInDoNotMiss" style="display:none">
+            <div class="headerBar-inner doNotMissBar">
+                <h1 class="doNotMissHeader">Do Not Miss!</h1>
+            </div>
+        </div>
+        <!-- Slides -->
+        <div class="reveal invertible home">
+            <!-- Any section element inside of this div is displayed as a slide -->
+            <div class="slides">
+                <!--0-->
+                <section class="present noHeader">
+                    <div class="startPage">
+                        <div class="startBtn invertible slideJump" data-horizontal="1" data-vertical="0">
+                            <div class="pull-left startText">Start New Protocol</div>
+                            <div class="pull-right startImg"><img src="assets/arrow.png"/></div>
+                        </div>
+                        <div id="resumeProtocol" class="startBtn invertible">
+                            <div class="pull-left startText">Resume Protocol</div>
+                            <div class="pull-right startImg"><img src="assets/arrow.png"/></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--1-->
+                <section>
+                    <div class="doNotMiss">
+                        <ul>
+                            <li class="invertible">Avoid hypoxia</li>
+                            <li class="invertible">Avoid hypotension</li>
+                            <li class="invertible">One episode of hypoxia or hypotension can significantly worsen outcome</li>
+                            <li class="invertible">Do NOT treat hypertension</li>
+                            <li class="invertible">Do NOT hyperventilate aggressively</li>
+                            <li class="invertible"><div id="okBtn" class="regBtn invertible slideJump" data-horizontal="2" data-vertical="0">OK</div></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!--2-->
+                <section>
+
+                    <section>
+                        <h1>Initial Assessment</h1>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="1">Airway<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="2">Breathing<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="5">Circulation<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="6">q 15' Neurochecks<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="7">Secure airway with ETT prn<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                    </section>
+
+                    <section>
+                        <h1>Airway</h1>
+                        <h3 class="invertible">Check airway for patency</h3>
+                        <h3 class="invertible">Optimize positioning</h3>
+                        <ul>
+                            <li class="invertible">Head midline</li>
+                            <li class="invertible">Maintain C-spine precautions</li>
+                        </ul>
+                        <h3 class="invertible">Check cough/gag reflex</h3>
+                        <h4 class="invertible">If airway protective reflexes absent or significant facial trauma, consider rapid sequence intubation</h4>
+                    </section>
+
+                    <section>
+                        <h1>Respiratory</h1>
+                        <li class="invertible">Check RR and respiratory patterns continuously</li>
+                        <li class="invertible">Goal: SpO<sub>2</sub> &gt; 94%</li>
+                        <ul>
+                            <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>One instance of hypoxia has significant negative impact on outcome</li>
+                        </ul>
+                        <li class="invertible">Goal: ETCO<sub>2</sub> 35-45mm Hg</li>
+                        <li class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="3">For intubated patients<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>DO NOT hyperventilate unless acute signs of herniation!</li>
+                    </section>
+
+                    <section>
+                        <h2>Guidelines for intubated TBI patients</h2>
+                        <ul>
+                            <li class="invertible">PEEP &ge; 5 to prevent atelectasis</li>
+                            <li class="invertible">F<sub>i</sub>O<sub>2</sub> 40-100% as needed for goal SpO<sub>2</sub> &gt; 94%</li>
+                            <li class="invertible">Goal: ETCO<sub>2</sub> 35-45mm Hg</li>
+                            <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>DO NOT hyperventilate unless acute signs of herniation!</li>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="4">Ensure adequate sedation/analgesia<img class="arrow" src="assets/downarrow.png"/></a></li>
+                            <li class="invertible">Paralytic as needed to secure airway</li>
+                            <ul>
+                                <li class="invertible">Vecuronium 0.1 mg/kg or rocuronium 1 mcg/kg</li>
+                            </ul>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Sedation and analgesia</h1>
+                        <ul>
+                            <li class="invertible">If intubated, maintain sedation and analgesia and consider paralytic</li>
+                            <ul>
+                                <li class="invertible">Fentanyl 1 mcg/kg or morphine 0.1 mg/kg IV</li>
+                                <li class="invertible">Midazolam 0.1 mg/kg/dose IV</li>
+                                <li class="invertible">Vecuronium 0.1 mg/kg or rocuronium 1 mcg/kg</li>
+                                <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Ensure adequate sedation before giving paralytic!</li>
+                                <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Avoid propofol due to risk of hypotension</li>
+                            </ul>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Cardiovascular</h1>
+                        <h4 class="invertible">Treat hypotension aggressively</h4>
+                        <h4 class="invertible">Assume ICP = 20</h4>
+                        <h4 class="invertible">BP/CPP Goals<img data-toggle="modal" class="modalLaunch bpModalLaunch pointer right" src="./assets/icon_stethiscope.png"/></h4>
+                        <h4 class="invertible">If MAP/CPP &lt; goal, push NS 20 mL/kg. Repeat X 1 as needed for MAP &lt; goal</h4>
+                        <h4 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="8">Consider dopamine or norepinephrine<img class="arrow" src="assets/downarrow.png"/></a></h4>
+                        <h4 class="invertible">Consider PRBC administration if Hgb &lt; 8</h4>
+                        <h4 class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>ONE episode of hypotension has negative impact on outcome</h4>
+                    </section>
+
+                    <section>
+                        <h1>Neurologic Exam</h1>
+                        <ul>
+                            <li class="invertible">Level of consciousness</li>
+                            <li class="invertible">Glasgow Coma Scale<img src="./assets/icon_comascale.png" class="modalLaunch gcsModalLaunch pointer right"/></li>
+                            <li class="invertible">Pupil equality, size and reactivity</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Indications for Intubation</h1>
+                        <ul>
+                            <li class="invertible">Persistent SpO<sub>2</sub> &lt; 94% despite optimal non-invasive oxygen supplementation</li>
+                            <li class="invertible">ETCO<sub>2</sub> &gt; 45 mmHg</li>
+                            <li class="invertible">GCS &lt; 8, motor GCS &lt; 2 or rapidly decreasing GCS<img src="./assets/icon_comascale.png" class="modalLaunch gcsModalLaunch pointer right"/></li>
+                            <li class="invertible">Unequal or fixed pupils or disconjugate gaze altered from baseline with altered mental status</li>
+                            <li class="invertible">Absent gag reflex</li>
+                            <li class="invertible">Any clinical signs of herniation: Cushings (High BP, low HR, low RR)</li>
+                            <li class="invertible">Decorticate or decerebrate posturing</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Pressors</h1>
+                        <ul>
+                            <li class="invertible">Start dopamine if MAP<img data-toggle="modal" class="modalLaunch bpModalLaunch pointer right" src="./assets/icon_stethiscope.png"/> less than goal and not responsive to fluid bolus x 2</li>
+                            <ul>
+                                <li class="invertible">Dose: 5-10 mcg/kg/min</li>
+                            </ul>
+                            <li class="invertible">Start norepinephrine if concern for spinal shock or if unresponsive to dopamine</li>
+                            <ul>
+                                <li class="invertible">Dose: 0.05-0.2 mcg/kg/min</li>
+                            </ul>
+                            <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>ONE episode of hypotension has negative impact on outcome</li>
+                            <li class="invertible">DO NOT treat hypertension without consulting receiving MD</li>
+                        </ul>
+                    </section>
+
+                </section>
+
+                <!--3-->
+                <section>
+
+                    <section>
+                        <h1>Respiratory</h1>
+                        <li class="invertible">Check RR and respiratory patterns continuously</li>
+                        <li class="invertible">Goal: SpO<sub>2</sub> &gt; 94%</li>
+                        <ul>
+                            <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>One instance of hypoxia has significant negative impact on outcome</li>
+                        </ul>
+                        <li class="invertible">Goal: ETCO<sub>2</sub> 35-45mm Hg</li>
+                        <li class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="1">For intubated patients<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>DO NOT hyperventilate unless acute signs of herniation!</li>
+                    </section>
+
+                    <section>
+                        <h2>Guidelines for intubated TBI patients</h2>
+                        <ul>
+                            <li class="invertible">PEEP &ge; 5 to prevent atelectasis</li>
+                            <li class="invertible">F<sub>i</sub>O<sub>2</sub> 40-100% as needed for goal SpO<sub>2</sub> &gt; 94%</li>
+                            <li class="invertible">Goal: ETCO<sub>2</sub> 35-45mm Hg</li>
+                            <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>DO NOT hyperventilate unless acute signs of herniation!</li>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="2">Ensure adequate sedation/analgesia<img class="arrow" src="assets/downarrow.png"/></a></li>
+                            <li class="invertible">Paralytic as needed to secure airway</li>
+                            <ul>
+                                <li class="invertible">Vecuronium 0.1 mg/kg or rocuronium 1 mcg/kg</li>
+                            </ul>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Sedation and analgesia</h1>
+                        <ul>
+                            <li class="invertible">If intubated, maintain sedation and analgesia and consider paralytic</li>
+                            <ul>
+                                <li class="invertible">Fentanyl 1 mcg/kg or morphine 0.1 mg/kg IV</li>
+                                <li class="invertible">Midazolam 0.1 mg/kg/dose IV</li>
+                                <li class="invertible">Vecuronium 0.1 mg/kg or rocuronium 1 mcg/kg</li>
+                                <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Ensure adequate sedation before giving paralytic!</li>
+                                <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Avoid propofol due to risk of hypotension</li>
+                            </ul>
+                        </ul>
+                    </section>
+
+                </section>
+
+                <!--4-->
+                <section>
+
+                    <section>
+                        <h1>Cardiovascular</h1>
+                        <h4 class="invertible">Treat hypotension aggressively</h4>
+                        <h4 class="invertible">Assume ICP = 20</h4>
+                        <h4 class="invertible">BP/CPP Goals<img data-toggle="modal" class="modalLaunch bpModalLaunch pointer right" src="./assets/icon_stethiscope.png"/></h4>
+                        <h4 class="invertible">If MAP/CPP &lt; goal, push NS 20 mL/kg. Repeat X 1 as needed for MAP &lt; goal</h4>
+                        <h4 class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="1">Consider dopamine or norepinephrine<img class="arrow" src="assets/downarrow.png"/></a></h4>
+                        <h4 class="invertible">Consider PRBC administration if Hgb &lt; 8</h4>
+                        <h4 class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>ONE episode of hypotension has negative impact on outcome</h4>
+                    </section>
+
+                    <section>
+                        <h1>Pressors</h1>
+                        <ul>
+                            <li class="invertible">Start dopamine if MAP<img data-toggle="modal" class="modalLaunch bpModalLaunch pointer right" src="./assets/icon_stethiscope.png"/> less than goal and not responsive to fluid bolus x 2</li>
+                            <ul>
+                                <li class="invertible">Dose: 5-10 mcg/kg/min</li>
+                            </ul>
+                            <li class="invertible">Start norepinephrine if concern for spinal shock or if unresponsive to dopamine</li>
+                            <ul>
+                                <li class="invertible">Dose: 0.05-0.2 mcg/kg/min</li>
+                            </ul>
+                            <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>ONE episode of hypotension has negative impact on outcome</li>
+                            <li class="invertible">DO NOT treat hypertension without consulting receiving MD</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--5-->
+                <section>
+
+                    <section>
+                        <h1>Neurologic</h1>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="5" data-vertical="1">If signs of herniation<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <ul>
+                            <li class="invertible">Briefly hyperventilate. Consider 3% NaCl or mannitol</li>
+                        </ul>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="5" data-vertical="2">If seizure activity present, treat aggressively<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="5" data-vertical="3">If intubated, maintain sedation and analgesia and consider paralytic<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                    </section>
+
+                    <section>
+                        <h2>Treatment of impending herniation</h2>
+                        <ul>
+                            <li class="invertible">If LOC down, pupillary changes, HR down, BP up</li>
+                            <ul>
+                                <li class="invertible">Increase RR with goal ETCO<sub>2</sub> 25-30 mmHg for NO MORE THAN 5 min.</li>
+                                <ul>
+                                    <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Prolonged hyperventilation can cause brain ischemia!</li>
+                                </ul>
+                                <li class="invertible">3% NaCl (6mL/kg) or Mannitol (0.5 gm/kg) IV</li>
+                            </ul>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Treatment of seizures</h1>
+                        <ul>
+                            <li class="invertible">If seizure activity present</li>
+                            <ul>
+                                <li class="invertible">Midazolam 0.1 mg/kg or lorazepam 0.1 mg/kg IV</li>
+                                <li class="invertible">Fosphenytoin or phenytoin 20 mg/kg IV</li>
+                                <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Ensure that IV is patent prior to adminstering phenytoin. Severe burn can result from IV infiltration</li>
+                            </ul>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Sedation and analgesia</h1>
+                        <ul>
+                            <li class="invertible">If intubated, maintain sedation and analgesia and consider paralytic</li>
+                            <ul>
+                                <li class="invertible">Fentanyl 1 mcg/kg or morphine 0.1 mg/kg IV</li>
+                                <li class="invertible">Midazolam 0.1 mg/kg/dose IV</li>
+                                <li class="invertible">Vecuronium 0.1 mg/kg or rocuronium 1 mcg/kg</li>
+                                <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Ensure adequate sedation before giving paralytic!</li>
+                                <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Avoid propofol due to risk of hypotension</li>
+                            </ul>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--6-->
+                <section>
+
+                    <section>
+                        <h1>Fluids and electrolytes</h1>
+                        <ul>
+                            <h3 class="invertible">Start IV fluids at maintenance</h3>
+                            <ul>
+                                <li class="invertible">NS if glucose &gt; 150 mg/dL</li>
+                                <li class="invertible">D5 NS if glucose between 80 and 150 mg/dL</li>
+                                <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Avoid hypotonic fluids!</li>
+                            </ul>
+                            <h3 class="invertible"><a class="slideJump invertible" data-horizontal="6" data-vertical="1">Check blood glucose<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                            <h3 class="invertible"><a class="slideJump invertible" data-horizontal="6" data-vertical="2">Check Na<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Glucose (mg/dL)</h1>
+                        <ul>
+                            <li class="invertible">Glucose between 80 and 150 mg/dL</li>
+                            <ul>
+                                <li class="invertible">D5 NS at maintenance</li>
+                            </ul>
+                            <li class="invertible">Glucose &gt; 150 mg/dL</li>
+                            <ul>
+                                <li class="invertible">NS at maintenance</li>
+                            </ul>
+                            <li class="invertible">Glucose &lt; 80 mg/dL</li>
+                            <ul>
+                                <li class="invertible">D10 5 mL/kg slow push, then D5 NS at maintenance</li>
+                                <li class="invertible">Repeat until Glucose &gt; 80 mg/dL</li>
+                                <li class="invertible">Recheck Glu q 15' during transport</li>
+                            </ul>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h1>Check Na</h1>
+                        <ul>
+                            <li class="invertible">If Na &lt; 135 AND 3% NaCl available, give 3% NaCl 6 mL/kg over 60 min.</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--7-->
+                <section>
+
+                    <section>
+                        <h1>Maintenance</h1>
+                        <h3 class="invertible">Position patient</h3>
+                        <ul>
+                            <li class="invertible">Elevate head 30-45<sup>o</sup></li>
+                            <li class="invertible">Head midline</li>
+                            <li class="invertible">Cervical collar appropriately positioned and not too tight</li>
+                        </ul>
+                        <h3 class="invertible">Maintain <a class="slideJump invertible" data-horizontal="7" data-vertical="1">temperature<img class="arrow" src="assets/downarrow.png"/></a> 35-37<sup>o</sup> C</h3>
+                        <h3 class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Do NOT warm aggressively</h3>
+                        <h3 class="invertible">Protect affected body parts from injury</h3>
+                    </section>
+
+                    <section>
+                        <h1>Temperature</h1>
+                        <ul>
+                            <li class="invertible">Maintain temperature 35-37<sup>o</sup> C</li>
+                            <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Do NOT warm aggressively</li>
+                            <li class="invertible">Acetaminophen 15 mg/kg ng or pr</li>
+                            <li class="invertible">Continuous temperature monitoring is indicated</li>
+                            <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Avoid hyperthermia</li>
+                        </ul>
+                    </section>
+                </section>
+
+            </div>
+
+            <!--Transport time-->
+            <aside class="transportTimeAside showInProtocol" style="display:none">
+                <span class="timerHeader">Elapsed Transport Time </span><span id="elapsed" class="timerTime invertible"></span>
+            </aside>
+
+            <!--Navigation Arrows-->
+            <aside class="showInProtocol backToTop" style="display:none;">
+                <img class="pointer" src="./assets/icon_backtotop.png"/>
+            </aside>
+
+            <!--Navigation Arrows-->
+            <aside id="controls" class="controls showInProtocol" style="display:none;">
+	            <div class="navigate-left"></div>
+	            <div class="navigate-right"></div>
+	            <div class="navigate-up"></div>
+	            <div class="navigate-down"></div>
+            </aside>
+        </div>
+
+         <!--MAP Modal Lookup-->
+        <div id="lookupModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="./assets/table_MAP.png">
+                </div>
+            </div>
+        </div>
+
+        <!--GCS Modal Lookup-->
+        <div id="comaModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+            </div>
+            <div class="modal-body">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">Verbal</a></li>
+                        <li><a href="#tab2" data-toggle="tab">Pre-Verbal</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <img src="./assets/table_comascale.png">
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <img src="./assets/table_preverbal.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--PDF View-->
+        <div class="pdf invertible" style="display:none;">
+            <div class="pseudoSlide pdf">
+                <iframe src="../../CHO/tbiProtocol.pdf"></iframe>
+            </div>
+        </div>
+
+        <!--Help View-->
+        <div class="help invertible" style="display:none">
+            <div class="pseudoSlide">
+                <h1>Help</h1>
+                <h2>Glossary</h2>
+                <ul>
+                    <li class="invertible">VS: Vital Signs</li>
+                    <li class="invertible">Neu: Neurochecks</li>
+                    <li class="invertible">Glu: Glucose</li>
+                    <li class="invertible">Na: Sodium</li>
+                </ul>
+                <h2>Tips</h2>
+                <ul>
+                    <li class="invertible">Pressing the "Home" button takes you back to where you were in the algorithm, NOT to the beginning</li>
+                    <li class="invertible"><img src="./assets/icon_stethiscope.png" class="modalLaunch bpModalLaunch pointer left"/>Touching this icon will bring up a table of MAP/CPP Goals</li>
+                    <li class="invertible"><img src="./assets/icon_comascale.png" class="modalLaunch gcsModalLaunch pointer left"/>Touching this icon will bring up a scrollable GCS table</li>
+                    <li class="invertible"><img src="./assets/icon_backtotop.png" class="backToTopTip"/>Touching this icon will take you to the top of the column you are currently in</li>
+                    <li class="invertible">Tap the arrows in the lower right corner of the protocol view to move around the pages. Illuminated arrows mean you can touch them to switch pages</li>
+                    <li class="invertible">When you are in the protocol view, you can pinch two fingers towards each other to show an overview of the pages. From there, you can tap the page you want to jump to</li>
+                    <li class="invertible">If you are viewing the PDF in landscape mode, you can use two fingers to scroll through it</li>
+                </ul>
+            </div>
+        </div>
+
+        <!--JS declaration-->
+        <script type="text/javascript" src="./revealjs/js/reveal.js"></script>
+        <script type="text/javascript" src="./countdown/jquery.countdown.js"></script>
+        <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>

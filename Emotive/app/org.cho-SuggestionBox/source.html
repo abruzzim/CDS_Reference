@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+<title>Suggestion Box</title>
+
+<link rel="stylesheet" href="../../libV2/cdf.css" />
+
+<script type="text/javascript" src="../../libV2/cdf.js"></script>
+
+<script type="text/javascript" src="../../jslib/handlebars.js"></script>
+<script type="text/javascript" src="source.js"></script>
+<link rel="stylesheet" href="my.css" />
+
+<!--Template for list of categories-->
+<script id="mostStarredCategoriesTemplate" type="text/x-handlebars-template">
+    {{#each categoryInfo}}
+    <li>
+        <a href="javascript:showCategory('{{this.name}}',true)">{{this.displayName}}
+            <span class="ui-li-count">{{this.count}}</span>
+        </a>
+    </li>
+    {{/each}}
+</script>
+
+<!--Template for initial block of most popular suggestions-->
+<script id="mostStarredSuggestionsTemplate" type="text/x-handlebars-template">
+    {{#each mostStarredArray}}
+    <li>
+        <a href="javascript:showSuggestionDetail('{{this.id}}')">
+            {{this.title}}
+            <span class="ui-li-count">
+                {{starString this.stars}}
+            </span>
+        </a>
+    </li>
+    {{/each}}
+</script>
+
+<!--Template for extra blocks of most popular suggestions-->
+<script id="mostStarredSuggestionsAdditionalTemplate" type="text/x-handlebars-template">
+    {{#each mostStarredBlock}}
+    <li>
+        <a href="javascript:showSuggestionDetail('{{this.id}}')">
+            {{this.title}}
+            <span class="ui-li-count">
+                {{starString this.stars}}
+            </span>
+        </a>
+    </li>
+    {{/each}}
+</script>
+
+<!--Template for initial block of most recent suggestions-->
+<script id="mostRecentSuggestionsTemplate" type="text/x-handlebars-template">
+    {{#if mostRecentArray.length}}
+        {{#each mostRecentArray}}
+        <li>
+            <a href="javascript:showSuggestionDetail('{{this.id}}')">
+                {{this.title}}
+                <span class="ui-li-count">
+                    {{timeSince this.createdAt}}
+                </span>
+            </a>
+        </li>
+        {{/each}}
+    {{else}}
+        <li>No suggestions have been created yet.</li>
+    {{/if}}
+</script>
+
+<!--Template for extra blocks of most recent suggestions-->
+<script id="mostRecentSuggestionsAdditionalTemplate" type="text/x-handlebars-template">
+    {{#each mostRecentBlock}}
+    <li>
+        <a href="javascript:showSuggestionDetail('{{this.id}}')">
+            {{this.title}}
+            <span class="ui-li-count">
+                {{timeSince this.createdAt}}
+            </span>
+        </a>
+    </li>
+    {{/each}}
+</script>
+
+<!--Template for initial block of searched for suggestions-->
+<script id="searchedForSuggestionsTemplate" type="text/x-handlebars-template">
+    {{#if searchedForArray.length}}
+        {{#each searchedForArray}}
+        <li>
+            <a href="javascript:showSuggestionDetail('{{this.id}}')">
+                {{this.title}}
+                <span class="ui-li-count">
+                    {{timeSince this.createdAt}}
+                </span>
+            </a>
+        </li>
+        {{/each}}
+    {{else}}
+        <li>This search returned no results.</li>
+    {{/if}}
+</script>
+
+<!--Template for extra blocks of searched for suggestions-->
+<script id="searchedForSuggestionsAdditionalTemplate" type="text/x-handlebars-template">
+    {{#each searchedForBlock}}
+    <li>
+        <a href="javascript:showSuggestionDetail('{{this.id}}')">
+            {{this.title}}
+            <span class="ui-li-count">
+                {{timeSince this.createdAt}}
+            </span>
+        </a>
+    </li>
+    {{/each}}
+</script>
+
+</head>
+
+
+    <body>
+        <section id="Loading" data-role="page" data-theme="b">
+            <div data-role="content" class="CdfStartPage"></div>
+        </section>
+
+        <section id="MainPage" data-role="page">
+            <div data-role="content" style="padding:15px">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a id="whatsHotTab" href="#" onclick="javascript:switchTab('whatsHot')">What's Hot</a>
+                        </li>
+                        <li>
+                            <a id="justAddedTab" href="#" onclick="javascript:switchTab('justAdded')">Just Added</a>
+                        </li>
+                        <li>
+                            <a id="browseTab" href="#" onclick="javascript:switchTab('browse')">Search</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="whatsHotDiv" class="tabDiv">
+                    <ul id="whatsHotList" data-role="listview" data-inset="true">
+                    </ul>
+                </div>
+                <div id="justAddedDiv" class="tabDiv">
+                    <ul id="justAddedList" data-role="listview" data-inset="true">
+                    </ul>
+                </div>
+                <div id="browseDiv" class="tabDiv">
+                    <div>
+                        <label class="ui-hidden-accessible" for="searchText">Search for a suggestion:</label>
+                        <input type="search" id="searchText" />
+                        <a data-role="button" href="javascript:searchForSuggestion()">Search</a>
+                    </div>
+                    <ul id="browseList" data-role="listview" data-inset="true">
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="MostStarredSuggestions" data-role="page">
+            <div data-role="content">
+                <ul id="mostStarredList" data-role="listview" data-inset="true"></ul>
+            </div>
+        </section>
+
+        <section id="NewSuggestion" data-role="page">
+            <div data-role="content">
+                <div>
+                    <select id="newSuggestionCategory" data-ec-bindto="Emotive.Data.suggestion.category"></select>
+                </div>
+                <div>
+                    <select id="newSuggestionApp" data-ec-bindto="Emotive.Data.suggestion.app"></select>
+                </div>
+                <div>
+                    <input id="newSuggestionTitle" data-ec-bindto="Emotive.Data.suggestion.title" placeholder="Title" type="text">
+                </div>
+                <div>
+                    <textarea id="newSuggestionBody" data-ec-bindto="Emotive.Data.suggestion.body" placeholder="Tell us what to improve..."></textarea>
+                </div>
+                <div>
+                    <img id="newSuggestionImage">
+                </div>
+                <div class="newImageButton" id="newAddImage">
+                    <a data-role="button" href="javascript:addImage()">Add Image</a>
+                </div>
+                <div class="newImageButton" id="newChangeImage">
+                    <a data-role="button" href="javascript:addImage()">Change Image</a>
+                </div>
+            </div>
+            <footer>
+                <a data-role="button" href="javascript:saveSuggestion()">Submit Suggestion</a>
+            </footer>
+        </section>
+
+        <section id="EditSuggestion" data-role="page">
+            <div data-role="content">
+                <div>
+                    <select id="editSuggestionCategory" data-ec-bindto="Emotive.Data.suggestion.category"></select>
+                </div>
+                <div>
+                    <select id="editSuggestionApp" data-ec-bindto="Emotive.Data.suggestion.app"></select>
+                </div>
+                <div>
+                    <input id="editSuggestionTitle" data-ec-bindto="Emotive.Data.suggestion.title" placeholder="Title" type="text">
+                </div>
+                <div>
+                    <textarea id="editSuggestionBody" data-ec-bindto="Emotive.Data.suggestion.body" placeholder="Tell us what to improve..."></textarea>
+                </div>
+                <div>
+                    <img id="editSuggestionImage">
+                </div>
+                <div class="imageButton" id="addImage">
+                    <a data-role="button" href="javascript:addImage()">Add Image</a>
+                </div>
+                <div class="imageButton" id="changeImage">
+                    <a data-role="button" href="javascript:addImage()">Change Image</a>
+                </div>
+            </div>
+            <footer>
+                <a data-role="button" href="javascript:saveSuggestion()">Save Suggestion</a>
+            </footer>
+        </section>
+
+        <section id="SuggestionDetail" data-role="page">
+            <div data-role="content">
+                <div>
+                    <h3 id="suggestionDetailTitle" data-ec-bindto="Emotive.Data.suggestion.title"></h3>
+                    <p>
+                        <span id="suggestionDetailCategory" data-ec-bindto="Emotive.Data.suggestion.category"></span>
+                    </p>
+                    <p>
+                        <span id="suggestionDetailApp" data-ec-bindto="Emotive.Data.suggestion.app"></span>
+                    </p>
+                    <div>
+                        <img id="suggestionDetailImage">
+                    </div>
+                    <div>
+                        <p>
+                            <span>Created by <span id="suggestionDetailCreatedBy" data-ec-bindto="Emotive.Data.suggestion.createdBy"></span>&nbsp;on&nbsp;<span id="suggestionDetailCreatedAt" data-ec-bindto="Emotive.Data.suggestion.createdAt"></span>
+                            </span>
+                        </p>
+                    </div>
+                    <div>
+                        <p id="suggestionDetailBody" data-ec-bindto="Emotive.Data.suggestion.body"></p>
+                    </div>
+                    <div id="star" class="starButton">
+                        <a data-role="button" href="javascript:toggleSuggestionStar('star')" data-icon="star" data-iconpos="left">Star this Suggestion</a>
+                    </div>
+                    <div id="unstar" class="starButton">
+                        <a data-role="button" href="javascript:toggleSuggestionStar('unstar')" data-icon="star" data-iconpos="left">Unstar this Suggestion</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+
+</html>

@@ -1,0 +1,576 @@
+<html lang="en">
+    <head>
+        <title>Status Epilepticus Protocol</title>
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./revealjs/css/reveal.css">
+		<link rel="stylesheet" href="./countdown/jquery.countdown.css" />
+        <link rel="stylesheet" href="../../CHO/emotive.css">
+        <script type="text/javascript" src="../../libV2/ncdf.js"></script>
+        <script type="text/javascript" src="fastclick/fastclick.min.js"></script>
+        <script type="text/javascript" src="./source.js"></script>
+    </head>
+
+    <body class="invertible">
+        <!-- Header bar -->
+        <div class="headerBar showInProtocol highZ" style="display: none">
+		    <div class="headerBar-inner">
+                <table class="pull-left header-table">
+                    <tr>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="home" src="./assets/btn_home_on.png"/></td>
+                        <td class="pointer" onclick="toggleColors()"><img class="header-table-btn-padding sunMoon" src="./assets/btn_night.png"/></td>
+                    </tr>
+                    <tr>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="pdf" src="./assets/btn_pdf.png"/></td>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="help" src="./assets/btn_help.png"/></td>
+                    </tr>
+                </table>
+                <div class="pull-right headerBar-header"><span id="countdown" class="timerTime"></span>
+                    <table class="timer-table">
+                        <tr>
+                            <td>
+                                <table class="tablePast sub-table">
+                                    <tr>
+                                        <td id="VSPast" class="mini" style="display:none;">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuPast" class="mini" style="display:none;">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="IVFPast" class="mini" style="display:none;">IVF</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="LabsPast" class="mini" style="display:none;">Labs</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="AbxPast" class="mini" style="display:none;">Abx</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GluPast" class="mini" style="display:none;">Glu</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Past</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="tablePresent sub-table">
+                                    <tr>
+                                        <td id="VSPresent" class="mini">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuPresent" class="mini">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="IVFPresent" class="mini">IVF</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="LabsPresent" class="mini">Labs</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="AbxPresent" class="mini">Abx</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GluPresent" class="mini" style="display:none;">Glu</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Present</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="tableFuture sub-table">
+                                    <tr>
+                                        <td id="VSFuture" class="mini">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuFuture" class="mini">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="IVFFuture" class="mini" style="display:none;">IVF</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="LabsFuture" class="mini" style="display:none;">Labs</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="AbxFuture" class="mini" style="display:none;">Abx</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GluFuture" class="mini" style="display:none;">Glu</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mini inactive filler">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Future</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+		</div>
+        <div class="headerBar showInDoNotMiss" style="display: none;">
+            <div class="headerBar-inner doNotMissBar">
+                <h1 class="doNotMissHeader">Do Not Miss!</h1>
+            </div>
+        </div>
+        <!-- Slides -->
+        <div class="reveal invertible home">
+            <!-- Any section element inside of this div is displayed as a slide -->
+            <div class="slides">
+                <!--0-->
+                <section class="present noHeader">
+                    <div class="startPage">
+                        <div class="startBtn invertible slideJump" data-horizontal="1" data-vertical="0">
+                            <div class="pull-left startText">Start New Protocol</div>
+                            <div class="pull-right startImg"><img src="assets/arrow.png"/></div>
+                        </div>
+                        <div id="resumeProtocol" class="startBtn invertible">
+                            <div class="pull-left startText">Resume Protocol</div>
+                            <div class="pull-right startImg"><img src="assets/arrow.png"/></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--1-->
+                <section>
+                    <div class="doNotMiss">
+                        <ul>
+                            <li class="invertible">Paralytic agents mask ongoing seizure activity</li>
+                            <li class="invertible">Prolonged seizures (> 30 mins) may result in hypoglycemia, acidosis and hyperpyrexia</li>
+                            <li class="invertible">Consider Head CT if:</li>
+                            <ul>
+                                <li class="invertible">History of or external evidence of trauma and/or</li>
+                                <li class="invertible">Infant without external evidence of trauma (R/O abuse)</li>
+                            </ul>
+                            <li class="invertible"><div id="okBtn" class="regBtn invertible slideJump" data-horizontal="2" data-vertical="0">OK</div></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!--2-->
+                <section>
+                    <section>
+                        <h1>Time Zero</h1>
+                        <ul>
+                            <li class="invertible">Assess, treat, stabilize per protocol</li>
+                            <li class="invertible">Perform and record <a class="slideJump invertible" data-horizontal="2" data-vertical="1">neurological exams<img class="arrow" src="assets/downarrow.png"/></a> at least every 5 minutes</li>
+                            <li class="invertible">Indications for <a class="slideJump invertible" data-horizontal="2" data-vertical="2">Intubation<img class="arrow" src="assets/downarrow.png"/></a></li>
+                            <li class="invertible">Consider head CT if:</li>
+                            <ul>
+                                <li class="invertible">Evidence of trauma</li>
+                                <li class="invertible">Infant (<1 year of age)</li>
+                            </ul>
+                            <li class="invertible">Neurosurgical intervention, if available, may be required prior to transport</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Neurological Exams</h1>
+                        <ul>
+                            <li class="invertible">Level of consciousness</li>
+                            <li class="invertible">Glasgow Coma Scale<img src="./assets/icon_comascale.png" class="modalLaunch gcsModalLaunch pointer right"/></li>
+                            <li class="invertible">Pupil equality, size and reactivity</li>
+                            <li class="invertible">Gaze conjugate or disconjugate</li>
+                            <li class="invertible">BP</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Indications for Intubation</h1>
+                        <ul>
+                            <li class="invertible">SpO<sub>2</sub> < 94% despite optimal non- invasive support</li>
+                            <li class="invertible">Loss of gag reflex</li>
+                            <li class="invertible">Clinical signs of herniation: Cushing's= &uarr;BP + &darr;HR + irreg. resp.</li>
+                            <li class="invertible">Avoid paralysis during intubation if possible to avoid masking seizures</li>
+                            <ul>
+                                <li class="invertible">If paralysis necessary for pt safety, monitor for: &uarr;BP, &darr;SpO<sub>2</sub>, pupil dilation (signs of seizure)</li>
+                            </ul>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--3-->
+                <section>
+                    <section>
+                        <h1>Fluids and Electrolytes</h1>
+                        <h3 class="invertible">Check <a class="slideJump invertible" data-horizontal="3" data-vertical="1">blood glucose<img class="arrow" src="assets/downarrow.png"/></a> q 30 min until seizure stopped. Continue checking hourly x 4 hours once stable</h3>
+                        <h3 class="invertible">Check <a class="slideJump invertible" data-horizontal="3" data-vertical="2">Na<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible">Check <a class="slideJump invertible" data-horizontal="3" data-vertical="3">iCa (ionized calcium)<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h4 class="invertible">Use EPOC for lytes. Expect acidosis. Consider fluid bolus.</h4>
+                    </section>
+                    <section>
+                        <h1>Glucose</h1>
+                        <li class="invertible">Check BS (blood glucose) q 30 min until seizure stopped, then q 1 hr</li>
+                        <li class="invertible expandable">If BS &gt; 150<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                        <ul style="display: none">
+                            <li class="invertible">Use NS as IVF</li>
+                        </ul>
+                        <li class="invertible expandable">If BS &lt; 150 and &gt; 80<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                        <ul style="display: none">
+                            <li class="invertible">Use D5 NS as IVF</li>
+                        </ul>
+                        <li class="invertible expandable">If BS &lt; 80<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                        <ul style="display: none">
+                            <li class="invertible">Give D25 2 mL/kg slow IVP, then D5 NS as IVF</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Check Na</h1>
+                        <ul>
+                            <li class="invertible expandable">Na &lt; 120<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display: none">
+                                <li class="invertible">Give 6 mL/kg 3% NaCl over 10 min.</li>
+                                <li class="invertible">If 3% NaCl unavailable, give NS 20 mL/kg</li>
+                            </ul>
+                            <li class="invertible expandable">Na &lt; 130 and ongoing seizure after phenytoin<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display: none">
+                                <li class="invertible">Give 6 mL/kg 3% NaCl over 10 min.</li>
+                                <li class="invertible">If 3% NaCl unavailable, give NS 20 mL/kg</li>
+                            </ul>
+                            <li class="invertible">Check Na after bolus and repeat 3% NaCl as above prn &darr;Na</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Check iCa<sup>++</sup> (ionized Calcium)</h1>
+                        <ul>
+                            <li class="invertible">If iCa<sup>++</sup> &lt; 0.90</li>
+                                <ul>
+                                    <li class="invertible">Ca gluconate 50 mg/kg IV over 2 min.</li>
+                                </ul>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--4-->
+                <section>
+                    <section>
+                        <h1>Neurologic</h1>
+                        <h3 class="invertible">If seizing,</h3>
+                        <ul>
+                            <li class="invertible">Lorazepam 0.1 mg/kg slow IV push (max 2 mg)</li>
+                            <ul>
+                                <li class="invertible">May repeat in 5 min prn seizure activity x 3</li>
+                            </ul>
+                            <li class="invertible">Monitor respiratory status and BP. Consult MD if BP &gt; 150</li>
+                        </ul>
+                        <h3 class="invertible">If <a class="slideJump invertible" data-horizontal="4" data-vertical="1">still seizing<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                    </section>
+                    <section>
+                        <h1>Ongoing seizure</h1>
+                        <ul>
+                            <li class="invertible">Fosphenytoin (or phenytoin*) 20 mg/kg IV over 20 minutes</li>
+                            <li class="invertible">Wait 5 minutes. Ensure <a class="slideJump invertible" data-horizontal="4" data-vertical="2">glucose<img class="arrow" src="assets/downarrow.png"/></a>, <a class="slideJump invertible" data-horizontal="4" data-vertical="3">Na<img class="arrow" src="assets/downarrow.png"/></a>, and <a class="slideJump invertible" data-horizontal="4" data-vertical="4">iCa<img class="arrow" src="assets/downarrow.png"/></a> are corrected. If still seizing, repeat.</li>
+                            <li class="invertible">Fosphenytoin or phenytoin <u>10</u> mg/kg</li>
+                            <li class="invertible">*Phenytoin may result in arrhythmia or precipitate PIV. Use with caution.</li>
+                            <li class="invertible">If patient currently taking phenobarbital, phenytoin and/or valproate: check level STAT</li>
+                        </ul>
+                        <h3 class="invertible">If <a class="slideJump invertible" data-horizontal="4" data-vertical="5">still seizing<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                    </section>
+                    <section>
+                        <h1>Glucose</h1>
+                        <li class="invertible">Check BS (blood glucose) q 30 min until seizure stopped, then q 1 hr</li>
+                        <li class="invertible expandable">If BS &gt; 150<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                        <ul style="display: none">
+                            <li class="invertible">Use NS as IVF</li>
+                        </ul>
+                        <li class="invertible expandable">If BS &lt; 150 and &gt; 80<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                        <ul style="display: none">
+                            <li class="invertible">Use D5 NS as IVF</li>
+                        </ul>
+                        <li class="invertible expandable">If BS &lt; 80<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                        <ul style="display: none">
+                            <li class="invertible">Give D25 2 mL/kg slow IVP, then D5 NS as IVF</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Check Na</h1>
+                        <ul>
+                            <li class="invertible expandable">Na &lt; 120<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display: none">
+                                <li class="invertible">Give 6 mL/kg 3% NaCl over 10 min.</li>
+                                <li class="invertible">If 3% NaCl unavailable, give NS 20 mL/kg</li>
+                            </ul>
+                            <li class="invertible expandable">Na &lt; 130 and ongoing seizure after phenytoin<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display: none">
+                                <li class="invertible">Give 6 mL/kg 3% NaCl over 10 min.</li>
+                                <li class="invertible">If 3% NaCl unavailable, give NS 20 mL/kg</li>
+                            </ul>
+                            <li class="invertible">Check Na after bolus and repeat 3% NaCl as above prn &darr;Na</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Check iCa<sup>++</sup> (ionized Calcium)</h1>
+                        <ul>
+                            <li class="invertible">If iCa<sup>++</sup> &lt; 0.90</li>
+                            <ul>
+                                <li class="invertible">Ca gluconate 50 mg/kg IV over 2 min.</li>
+                            </ul>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>If still seizing,</h1>
+                        <ul>
+                            <li class="invertible">Consider head CT to rule out bleed even if no evidence of trauma</li>
+                        </ul>
+                        <h3 class="invertible">If <a class="slideJump invertible" data-horizontal="4" data-vertical="6">still seizing<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                    </section>
+                    <section>
+                        <h1>If still seizing,</h1>
+                        <ul>
+                            <li class="invertible">Phenobarbital 20 mg/kg IV over 20 minutes</li>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="7">Ensure adequate BP and respiratory status<img class="arrow" src="assets/downarrow.png"/></a></li>
+                            <li class="invertible">Check and correct <a class="slideJump invertible" data-horizontal="4" data-vertical="2">glucose<div class="arrowUp invertible"></div></a> and <a class="slideJump invertible" data-horizontal="4" data-vertical="3">Na<div class="arrowUp invertible"></div></a></li>
+                            <li class="invertible">If still seizing after 5 min, give Phenobarbital <u>10</u> mg/kg IV over 20 minutes</li>
+                            <li class="invertible">Watch BP and treat hypotension!</li>
+                        </ul>
+                        <h3 class="invertible">If <a class="slideJump invertible" data-horizontal="4" data-vertical="9">still seizing<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                    </section>
+                    <section>
+                        <h1>Indications for Intubation</h1>
+                        <ul>
+                            <li class="invertible">SpO<sub>2</sub> < 94% despite optimal non- invasive support</li>
+                            <li class="invertible">Loss of gag reflex</li>
+                            <li class="invertible">Clinical signs of herniation: Cushing's= &uarr;BP + &darr;HR + irreg. resp.</li>
+                            <li class="invertible">Avoid paralysis during intubation if possible to avoid masking seizures</li>
+                            <ul>
+                                <li class="invertible">If paralysis necessary for pt safety, monitor for: &uarr;BP, &darr;SpO<sub>2</sub>, pupil dilation (signs of seizure)</li>
+                            </ul>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="8">Ensure adequate sedation and analgesia<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Sedation and analgesia</h1>
+                        <ul>
+                            <li class="invertible">Fentanyl 1 mcg/kg or morphine 0.1 mg/kg</li>
+                            <li class="invertible">Midazolam 0.1 mg/kg (max 5 mg) or lorazepam 0.1 mg/kg (max 2 mg)</li>
+                            <li class="invertible">Avoid propofol due to risk of hypotension</li>
+                            <li class="invertible">Avoid paralytics if clinically possible</li>
+                            <li class="invertible">If patient currently taking phenobarbital, phenytoin and/or valproate: check level STAT</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>If still seizing,</h1>
+                        <ul>
+                            <li class="invertible">Contact PICU. Fourth line treatments include:</li>
+                            <ul>
+                                <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="10">Levetiracetam (Keppra)<img class="arrow" src="assets/downarrow.png"/></a></li>
+                                <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="11">Valproic Acid (Depakon)<img class="arrow" src="assets/downarrow.png"/></a></li>
+                                <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="12">Midazolam infusion<img class="arrow" src="assets/downarrow.png"/></a></li>
+                            </ul>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="7">Ensure adequate BP and respiratory status<div class="arrowUp invertible"></div></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Levetiracetam (Keppra)</h1>
+                        <ul>
+                            <li class="invertible">20 mg/kg load IV (if patient on this drug already, consider 5mg/kg/load)</li>
+                            <li class="invertible">Dilute dose in 100 mL NS, LR, or D5W and infuse over 15 minutes</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Valproic Acid (Depakon)</h1>
+                        <ul>
+                            <li class="invertible">20-40 mg/kg load IV (if patient on this drug already, send stat level and consider 5mg/kg load)</li>
+                            <li class="invertible">Dilute dose in 50 mL of NS, LR, or D5W and infuse over 60 minutes</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Midazolam infusion</h1>
+                        <ul>
+                            <li class="invertible">Midazolam infusion at 0.1 mg/kg/hr IV</li>
+                            <li class="invertible">Dilute 5 mg/mL formulation to concentration of 0.5 mg/mL with NS or D5W</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--5-->
+                <section>
+                    <section>
+                        <h1>Respiratory</h1>
+                        <ul>
+                            <li class="invertible">Goal SpO2 &gt; 94%</li>
+                            <ul>
+                                <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/> One instance of hypoxia has significant negative impact on outcome. Continuously ensure adequate oxygenation</li>
+                            </ul>
+                            <li class="invertible">If <a class="slideJump invertible" data-horizontal="5" data-vertical="1">intubated<img class="arrow" src="assets/downarrow.png"/></a></li>
+                            <ul>
+                                <li class="invertible">Goal EtCO2 35-45mm Hg</li>
+                                <li class="invertible">Minimize mean airway pressure. Maximize oxygenation.</li>
+                                <ul>
+                                    <li class="invertible">Note: physiologic PEEP (3-5) is preferred.</li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Indications for Intubation</h1>
+                        <ul>
+                            <li class="invertible">SpO<sub>2</sub> < 94% despite optimal non- invasive support</li>
+                            <li class="invertible">Loss of gag reflex</li>
+                            <li class="invertible">Clinical signs of herniation: Cushing's= &uarr;BP + &darr;HR + irreg. resp.</li>
+                            <li class="invertible">Avoid paralysis during intubation if possible to avoid masking seizures</li>
+                            <ul>
+                                <li class="invertible">If paralysis necessary for pt safety, monitor for: &uarr;BP, &darr;SpO<sub>2</sub>, pupil dilation (signs of seizure)</li>
+                            </ul>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--6-->
+                <section>
+                    <section>
+                        <h1>Cardiovascular</h1>
+                        <h3 class="invertible">Maintain BP</h3>
+                        <ul>
+                            <li class="invertible">Age &lt; 1, MAP &gt; 50</li>
+                            <li class="invertible">Age 1-8 yrs, MAP &gt; 70</li>
+                            <li class="invertible">Age &ge; 8, MAP &gt; 80</li>
+                            <li class="invertible">If MAP &lt; goal, push NS 20 mL/kg. Repeat X 1 as needed for MAP &lt; goal</li>
+                            <li class="invertible">Consider dopamine (5-10 mcg/kg/min)</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--7-->
+                <section>
+                    <section>
+                        <h1>Fever</h1>
+                        <ul>
+                            <li class="invertible">Treat hyperthermia - Fever decreases seizure threshold and makes status epilepticus harder to stop.</li>
+                            <li class="invertible">Acetaminophen 15 mg/kg NG or PR or IV</li>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="7" data-vertical="1">Is infection suspected?<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Infection</h1>
+                        <ul>
+                            <li class="invertible">If infection suspected, verify blood cultures have been sent and LP done.</li>
+                            <li class="invertible">If LP done, request 1 CSF tube to bring on transport.</li>
+                            <li class="invertible">Do not do LP in unstable patient!</li>
+                            <li class="invertible">Verify antibiotics have been given. If not, consider <a class="slideJump invertible" data-horizontal="7" data-vertical="2">Antibiotics<img class="arrow" src="assets/downarrow.png"/></a> Call MD for consult.</li>
+                            <li class="invertible">Transport personnel should assume contact and droplet precautions.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Antibiotics</h1>
+                        <ul>
+                            <li class="invertible">Ceftriaxone recommended dose of 100 mg/kg IVP</li>
+                            <li class="invertible">If patient has VP shunt, consider Vancomycin 15 mg/kg IV over 60 min</li>
+                            <li class="invertible">If infant with bloody CSF, consider Acyclovir 20 mg/kg IV over 60 min</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--8-->
+                <section>
+                    <section>
+                        <h1>Positioning</h1>
+                        <ul>
+                            <li class="invertible">Elevate HOB 30-45 degrees</li>
+                            <li class="invertible">Keep head midline to promote venous drainage</li>
+                        </ul>
+                    </section>
+                </section>
+
+            </div>
+
+            <!--Transport time-->
+            <aside class="transportTimeAside showInProtocol" style="display: none">
+                <span class="timerHeader">Elapsed Transport Time </span><span id="elapsed" class="timerTime invertible"></span>
+            </aside>
+
+            <!--Navigation Arrows-->
+            <aside class="showInProtocol backToTop" style="display: none;">
+                <img class="pointer" src="./assets/icon_backtotop.png"/>
+            </aside>
+
+            <!--Navigation Arrows-->
+            <aside id="controls" class="controls showInProtocol" style="display: none;">
+	            <div class="navigate-left"></div>
+	            <div class="navigate-right"></div>
+	            <div class="navigate-up"></div>
+	            <div class="navigate-down"></div>
+            </aside>
+        </div>
+
+        <!--GCS Modal Lookup-->
+        <div id="comaModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+            </div>
+            <div class="modal-body">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">Verbal</a></li>
+                        <li><a href="#tab2" data-toggle="tab">Pre-Verbal</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <img src="./assets/table_comascale.png">
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <img src="./assets/table_preverbal.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--PDF View-->
+        <div class="pdf invertible" style="display:none;">
+            <div class="pseudoSlide pdf">
+                <iframe src="../../CHO/statusEpilepticusProtocol.pdf"></iframe>
+            </div>
+        </div>
+
+        <!--Help View-->
+        <div class="help invertible" style="display:none">
+            <div class="pseudoSlide">
+                <h1>Help</h1>
+                <h2>Glossary</h2>
+                <ul>
+                    <li class="invertible">VS: Vital Signs</li>
+                    <li class="invertible">Neu: Neurochecks</li>
+                    <li class="invertible">IVF: Intravenous Fluids/Fluid Bolus</li>
+                    <li class="invertible">Lab: Lab Tests</li>
+                    <li class="invertible">Abx: Antibiotics</li>
+                    <li class="invertible">Glu: Blood Glucose</li>
+                </ul>
+                <h2>Tips</h2>
+                <ul>
+                    <li class="invertible">Pressing the "Home" button takes you back to where you were in the algorithm, NOT to the beginning</li>
+                    <li class="invertible"><img src="./assets/icon_comascale.png" class="modalLaunch gcsModalLaunch pointer left"/>Touching this icon will bring up a scrollable GCS table</li>
+                    <li class="invertible"><img src="./assets/icon_backtotop.png" class="backToTopTip"/>Touching this icon will take you to the top of the column you are currently in</li>
+                    <li class="invertible">Tap the arrows in the lower right corner of the protocol view to move around the pages. Illuminated arrows mean you can touch them to switch pages</li>
+                    <li class="invertible">To scroll through the PDF, first tap it, and then use two fingers to scroll</li>
+                </ul>
+            </div>
+        </div>
+
+        <!--JS declaration-->
+        <script type="text/javascript" src="./revealjs/js/reveal.js"></script>
+        <script type="text/javascript" src="./countdown/jquery.countdown.js"></script>
+        <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>

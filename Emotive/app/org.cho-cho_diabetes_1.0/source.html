@@ -1,0 +1,388 @@
+<html lang="en">
+    <head>
+        <title>Diabetes Protocol</title>
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./revealjs/css/reveal.css">
+		<link rel="stylesheet" href="./countdown/jquery.countdown.css" />
+        <link rel="stylesheet" href="../../CHO/emotive.css">
+        <script type="text/javascript" src="../../libV2/ncdf.js"></script>
+        <script type="text/javascript" src="fastclick/fastclick.min.js"></script>
+        <script type="text/javascript" src="./source.js"></script>
+    </head>
+
+    <body class="invertible">
+        <!-- Header bar -->
+        <div class="headerBar showInProtocol highZ" style="display: none">
+		    <div class="headerBar-inner">
+                <table class="pull-left header-table">
+                    <tr>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="home" src="./assets/btn_home_on.png"/></td>
+                        <td class="pointer" onclick="toggleColors()"><img class="header-table-btn-padding sunMoon" src="./assets/btn_night.png"/></td>
+                    </tr>
+                    <tr>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="pdf" src="./assets/btn_pdf.png"/></td>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="help" src="./assets/btn_help.png"/></td>
+                    </tr>
+                </table>
+                <div class="pull-right headerBar-header"><span id="countdown" class="timerTime"></span>
+                    <table class="timer-table">
+                        <tr>
+                            <td>
+                                <table class="tablePast sub-table">
+                                    <tr>
+                                        <td id="VSPast" class="inactive">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuPast" class="inactive">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GluPast" class="inactive">Glu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GasPast" class="inactive">Gas</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Past</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="tablePresent sub-table">
+                                    <tr>
+                                        <td id="VSPresent">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuPresent">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GluPresent">Glu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GasPresent">Gas</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Present</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="tableFuture sub-table">
+                                    <tr>
+                                        <td id="VSFuture">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuFuture">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GluFuture" class="inactive">Glu</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="GasFuture" class="inactive">Gas</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Future</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+		</div>
+        <div class="headerBar showInDoNotMiss" style="display: none">
+            <div class="headerBar-inner doNotMissBar">
+                <h1 class="doNotMissHeader">Do Not Miss!</h1>
+            </div>
+        </div>
+        <!-- Slides -->
+        <div class="reveal invertible home">
+            <!-- Any section element inside of this div is displayed as a slide -->
+            <div class="slides">
+                <section class="present noHeader">
+                    <div class="startPage">
+                        <div class="startBtn invertible slideJump" data-horizontal="1" data-vertical="0">
+                            <div class="pull-left startText">Start New Protocol</div>
+                            <div class="pull-right startImg"><img src="assets/arrow.png"/></div>
+                        </div>
+                        <div id="resumeProtocol" class="startBtn invertible">
+                            <div class="pull-left startText">Resume Protocol</div>
+                            <div class="pull-right startImg"><img src="assets/arrow.png"/></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="doNotMiss">
+                        <h3 class="invertible">Essentials of DKA</h3>
+                        <ul>
+                            <li class="invertible">Keep 'em dry and keep 'em sweet</li>
+                            <li class="invertible">Cerebral edema can develop even as labs get better!</li>
+                            <li class="invertible">Look for increasing corrected Na and gradual drop in Glu</li>
+                            <li class="invertible"><div id="okBtn" class="regBtn invertible slideJump" data-horizontal="2" data-vertical="0">OK</div></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <section>
+                    	<h1>First Hour Overview</h1>
+                        <h3 class="invertible">Place IV - 2 if possible</h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="1">Draw Labs<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="2">Start IVF<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="3">NEUROCHECKS!<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                    </section>
+                    <section>
+                        <h1>First Labs</h1>
+                        <ul>
+                            <li class="invertible">Essential Labs:</li>
+                                <ul>
+                                    <li class="invertible">Venous or Capillary Blood Gas with Electrolytes</li>
+                                    <li class="invertible">Calculate Corrected Na<img data-toggle="modal" class="modalLaunch calcModalLaunch pointer right" src="./assets/icon_calc.png"/></li>
+                                    <li class="invertible">Blood Glu</li>
+                                </ul>
+                            <li class="invertible">BUN</li>
+                            <li class="invertible">Creat</li>
+                            <li class="invertible">CBC</li>
+                            <li class="invertible">Phosphorous</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>IV Fluids</h1>
+                        <ul>
+                            <li class="invertible">Bolus with 20 mL/kg isotonic fluids only! NS, LR, Plasmalyte</li>
+                            <li class="invertible"><img class="infoImg info" src="assets/icon_info_dark.png"/>Repeat 20 mL/kg ONLY if hypotensive</li>
+                            <li class="invertible">Goal of fluid resuscitation is to assure perfusion and restore blood pressure NOT to normalize HR and mentation</li>
+                            <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>NO Bolus insulin</li>
+                            <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>NO sodium bicarbonate UNLESS patient hypotensive or in cardiopulmonary arrest</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>If acute change in mentation...</h2>
+                        <ul>
+                            <li class="invertible">1st Choice: Push 6 mL/kg 3% NaCl (hypertonic saline) IV to raise Na by 5 mEq/dL</li>
+                            <li class="invertible">OR</li>
+                            <li class="invertible">2nd Choice: Push 0.5 gm/kg mannitol IV</li>
+                            <li class="invertible">Consider CT scan</li>
+                            <li class="invertible">Consider controlling airway</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Second Hour Overview</h2>
+                        <h3 class="invertible">Recheck Blood Glu q 30 minutes</h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="2" data-vertical="1">Assess labs sent in first hour<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <ul>
+                            <li class="invertible">Check blood gas + electrolytes q 2 hr</li>
+                            <ul>
+                                <li class="invertible">Look for increase in corrected Na<img data-toggle="modal" class="modalLaunch calcModalLaunch pointer right" src="./assets/icon_calc.png"/> and pH (good), decr in K (expected)</li>
+                            </ul>
+                        </ul>
+                        <h3 class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/><a class="slideJump invertible" data-horizontal="3" data-vertical="1">Start insulin infusion<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="2">Start Maintenance IV Fluids<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="3">Neurochecks q 15 minutes!<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                    </section>
+                    <section>
+                    	<h1>Insulin Infusion</h1>
+                        <ul>
+                            <li class="invertible">Use Regular Humulin Insulin</li>
+                            <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>DO NOT use bolus insulin</li>
+                            <li class="invertible">250 units/250mL NS at:</li>
+                            <ul> 
+                            	<li class="invertible">Infants to Toddlers: 0.05 units/kg/hr to 0.1 units/kg/hour</li>
+                            	<li class="invertible">Everyone Else: 0.1 units/kg/hour</li>
+                            </ul>
+                            <li class="invertible">(Note: Maintenance IVF should already be running)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>IV Fluids</h2>
+                        <h3 class="invertible">All at 1.5 x Maintenance</h3>
+                        <ul>
+                            <li class="invertible expandable">If Glu &gt; 250<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display:none">
+                                <li class="invertible expandable">If K &ge; 5.0 AND/OR NO urine output<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                                <ul style="display: none">
+                                    <li class="invertible">NS</li>
+                                </ul>
+                                <li class="invertible expandable">If K &lt; 5.0 AND urine output documented<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                                <ul style="display: none">
+                                    <li class="invertible">1st choice: NS + 20 mEq KCl/L + 20 mEq Kphos/L</li>
+                                    <li class="invertible">2nd choice: NS + 40 mEq KCl/L</li>
+                                    <li class="invertible">3rd choice: NS + 20 mEq KCl/L</li>
+                                </ul>
+                            </ul>
+                            <li class="invertible expandable">If Glu &le; 250<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display: none">
+                                <li class="invertible expandable">If K &lt; 5 AND urine output documented<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                                <ul style="display: none">
+                                    <li class="invertible">1st choice: D10 NS + 20 mEq KCl/L + 20 mEq Kphos/L</li>
+                                    <li class="invertible">2nd choice: D5 NS + 40 mEq KCl/L</li>
+                                    <li class="invertible">3rd choice: D5 NS + 20 mEq KCl/L</li>
+                                </ul>
+                                <li class="invertible expandable">If K &ge; 5 and NO urine output<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                                <ul style="display: none">
+                                    <li class="invertible">1st choice: D10 NS</li>
+                                    <li class="invertible">2nd choice: D5 NS</li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>If acute change in mentation...</h2>
+                        <ul>
+                            <li class="invertible">1st Choice: Push 6 mL/kg 3% saline (hypertonic saline) IV to raise blood sodium by 5 mEq/dL</li>
+                            <li class="invertible">OR</li>
+                            <li class="invertible">2nd Choice: Push 0.5 gm/kg mannitol IV</li>
+                            <li class="invertible">Consider CT scan</li>
+                            <li class="invertible">Consider controlling airway</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Post 2 Hour Overview</h2>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="1">Check Neurochecks q 15 min<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="2">Check Glu Hourly<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible">Check blood gas with electrolytes q 2 hourly</h3>
+                        <ul>
+                            <li class="invertible">Look for increase in corrected Na<img data-toggle="modal" class="modalLaunch calcModalLaunch pointer right" src="./assets/icon_calc.png"/> and pH (good), decr in K (expected)</li>
+                        </ul>
+                        <h4 class="invertible"><img class="infoImg info" src="assets/icon_info_dark.png"/>Ice chips generally ok to give patient for dry mouth but otherwise patient remains STRICTLY NPO</h4>
+                    </section>
+                    <section>
+                        <h2>If acute change in mentation...</h2>
+                        <ul>
+                            <li class="invertible">1st Choice: Push 6 mL/kg 3% saline (hypertonic saline) IV to raise blood sodium by 5 mEq/dL</li>
+                            <li class="invertible">OR</li>
+                            <li class="invertible">2nd Choice: Push 0.5 gm/kg mannitol IV</li>
+                            <li class="invertible">Consider CT scan</li>
+                            <li class="invertible">Consider controlling airway</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Glucose</h1>
+                        <p class="invertible">If Glu dropping by &gt; 100 mg/dL/hr after initial fluid bolus AND already on dextrose-containing IVF, then</p>
+                        <ul>
+                            <li class="invertible">Increase rate to 2X maintenance (preferred) OR</li>
+                            <li class="invertible">TEMPORARILY decrease insulin infusion (from 0.1 units/kg/hr to 0.05 units/kg/hr)</li>
+                        </ul>
+                    </section>
+                </section>
+
+            </div>
+
+            <!--Transport time-->
+            <aside class="transportTimeAside showInProtocol" style="display:none">
+                <span class="timerHeader">Elapsed Transport Time </span><span id="elapsed" class="timerTime invertible"></span>
+            </aside>
+
+            <!--Navigation Arrows-->
+            <aside class="showInProtocol backToTop" style="display:none">
+                <img class="pointer" src="./assets/icon_backtotop.png"/>
+            </aside>
+
+            <!--Navigation Arrows-->
+            <aside id="controls" class="controls showInProtocol" style="display:none">
+	            <div class="navigate-left"></div>
+	            <div class="navigate-right"></div>
+	            <div class="navigate-up"></div>
+	            <div class="navigate-down"></div>
+            </aside>
+        </div>
+
+        <!-- Modal Calculator-->
+        <div id="calcModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+                <h3>Calculate Corrected Sodium</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label" for="measuredNa">Measured Na (mEq/L)</label>
+                        <div class="controls">
+                            <input type="number" id="measuredNa" class="modalInput">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="serumGlucose">Serum Glu (mg/dL)</label>
+                        <div class="controls">
+                            <input type="number" id="serumGlucose" class="modalInput">
+                        </div>
+                    </div>
+                    <div class="calculateBtnsDiv">
+                        <div id="calculateBtn" class="regBtn pull-left calcBtn">Calculate</div>
+                        <div id="calcClearBtn" class="regBtn pull-left calcBtn">Clear</div>
+                        <div class="regBtn pull-left calcBtn" data-dismiss="modal">Close</div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="correctedNa">Corrected Na (mEq/L)</label>
+                        <div class="controls">
+                            <input type="text" id="correctedNa" class="modalInput" readonly>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal Calculator-->
+        <div id="resultModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+                <h2>Corrected Sodium</h2>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <ul>
+                        <li id="lastNa">Last calculated value: <span id="lastNaSpan"></span></li>
+                    </ul>
+                    <ul>
+                        <li>If corr Na dropping, then</li>
+                        <ul>
+                            <li>If IVF is 0.45 NS, change to NS</li>
+                            <li>Consider slowing IVF rate from 1.5 to 1.25 x Maintenance</li>
+                            <li>Give 3% saline (hypertonic saline) - 3-6 mL/kg IV (especially if altered mentation)</li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--PDF View-->
+        <div class="pdf invertible" style="display:none;">
+            <div class="pseudoSlide pdf">
+                <iframe src="../../CHO/diabetesProtocol.pdf"></iframe>
+            </div>
+        </div>
+
+        <!--Help View-->
+        <div class="help invertible" style="display:none">
+            <div class="pseudoSlide">
+                <h1>Help</h1>
+                <h2>Glossary</h2>
+                <ul>
+                    <li class="invertible">VS: Vital Signs</li>
+                    <li class="invertible">Neu: Neurochecks</li>
+                    <li class="invertible">Glu: Glucose</li>
+                    <li class="invertible">Gas: Blood Gas</li>
+                </ul>
+                <h2>Tips</h2>
+                <ul>
+                    <li class="invertible">Pressing the "Home" button takes you back to where you were in the algorithm, NOT to the beginning</li>
+                    <li class="invertible"><img src="./assets/icon_calc.png" class="modalLaunch calcModalLaunch pointer left"/>Touching this icon will bring up a calculator for corrected sodium</li>
+                    <li class="invertible"><img src="./assets/icon_backtotop.png" class="backToTopTip"/>Touching this icon will take you to the top of the column you are currently in</li>
+                    <li class="invertible">Tap the arrows in the lower right corner of the protocol view to move around the pages. Illuminated arrows mean you can touch them to switch pages</li>
+                    <li class="invertible">When you are in the protocol view, you can pinch two fingers towards each other to show an overview of the pages. From there, you can tap the page you want to jump to</li>
+                    <li class="invertible">If you are viewing the PDF in landscape mode, you can use two fingers to scroll through it</li>
+                </ul>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="./revealjs/js/reveal.js"></script>
+        <script type="text/javascript" src="./countdown/jquery.countdown.js"></script>
+        <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>

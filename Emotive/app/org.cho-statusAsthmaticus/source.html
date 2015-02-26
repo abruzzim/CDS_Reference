@@ -1,0 +1,665 @@
+<html lang="en">
+    <head>
+        <title>Status Asthmaticus Protocol</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="revealjs/css/reveal.css">
+		<link rel="stylesheet" href="countdown/jquery.countdown.css" />
+        <link rel="stylesheet" href="../../CHO/emotive.css">
+        <script type="text/javascript" src="../../libV2/ncdf.js"></script>
+        <script type="text/javascript" src="fastclick/fastclick.min.js"></script>
+        <script type="text/javascript" src="source.js"></script>
+    </head>
+
+    <body class="invertible">
+        <!-- Header bar -->
+        <div class="headerBar showInProtocol highZ" style="display: none">
+		    <div class="headerBar-inner">
+                <table class="pull-left header-table">
+                    <tr>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="home" src="./assets/btn_home_on.png"/></td>
+                        <td class="pointer" onclick="toggleColors()"><img class="header-table-btn-padding sunMoon" src="./assets/btn_night.png"/></td>
+                    </tr>
+                    <tr>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="pdf" src="./assets/btn_pdf.png"/></td>
+                        <td><img class="header-table-btn header-table-btn-padding" data-state="help" src="./assets/btn_help.png"/></td>
+                    </tr>
+                </table>
+                <div class="pull-right headerBar-header"><span id="countdown" class="timerTime"></span>
+                    <table class="timer-table">
+                        <tr>
+                            <td>
+                                <table class="tablePast sub-table">
+                                    <tr>
+                                        <td id="VSPast" class="inactive">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="WOBPast" class="inactive">WOB</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuPast" class="inactive">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="inactive">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Past</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="tablePresent sub-table">
+                                    <tr>
+                                        <td id="VSPresent">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="WOBPresent">WOB</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuPresent">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="inactive">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Present</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="tableFuture sub-table">
+                                    <tr>
+                                        <td id="VSFuture">VS</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="WOBFuture">WOB</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="NeuFuture">Neu</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="inactive">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tiny">Future</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+		</div>
+        <div class="headerBar showInDoNotMiss" style="display: none">
+            <div class="headerBar-inner doNotMissBar">
+                <h1 class="doNotMissHeader">Do Not Miss!</h1>
+            </div>
+        </div>
+        <!-- Slides -->
+        <div class="reveal invertible home">
+            <!-- Any section element inside of this div is displayed as a slide -->
+            <div class="slides">
+                <!--0-->
+                <section class="present noHeader">
+                    <div class="startPage">
+                        <div class="startBtn invertible slideJump" data-horizontal="1" data-vertical="0">
+                            <div class="pull-left startText">Start New Protocol</div>
+                            <div class="pull-right startImg"><img src="assets/arrow.png"/></div>
+                        </div>
+                        <div id="resumeProtocol" class="startBtn invertible">
+                            <div class="pull-left startText">Resume Protocol</div>
+                            <div class="pull-right startImg"><img src="assets/arrow.png"/></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--1-->
+                <section>
+                    <div class="doNotMiss">
+                        <ul>
+                            <li class="invertible">&darr; or no BS, &darr;RR and/or &darr;HR seen with impending respiratory failure</li>
+                            <li class="invertible">Extreme agitation OR obtundation seen with severe hypoxemia</li>
+                            <li class="invertible">&uarr;&uarr;HR IS expected. Minimal risk of MI with &beta; agonist use compared to adults</li>
+                            <li class="invertible">Allow patient to assume position of comfort (usually tripod NOT supine) to allow for accessory muscle usage</li>
+                            <li class="invertible"><div id="okBtn" class="regBtn invertible slideJump" data-horizontal="2" data-vertical="0">OK</div></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!--2-->
+                <section>
+                    <section>
+                        <h1>Initial Assessment</h1>
+                        <h3 class="invertible">Degree of Distress:</h3>
+                        <ul>
+                            <h3 class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="0">Severe</a></h3>
+                            <h3 class="invertible"><a class="moderateModalLaunch invertible">Moderate</a></h3>
+                            <h3 class="invertible"><a class="mildModalLaunch invertible">Mild</a></h3>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--3-->
+                <section>
+                    <section>
+                        <h1>Severe Distress</h1>
+                        <ul>
+                            <li class="invertible">Restlessness/agitation, or lethargy</li>
+                            <li class="invertible">Severe retractions</li>
+                            <li class="invertible">Head bobbing</li>
+                            <li class="invertible">Absent or minimal wheezes</li>
+                            <li class="invertible">Abnormally low RR</li>
+                            <li class="invertible">Unable to speak</li>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="1">Next<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Severe Distress</h1>
+                        <ul>
+                            <li class="invertible">Support Airway</li>
+                            <ul>
+                                <li class="invertible">100% Oxygen</li>
+                                <li class="invertible">If CPAP/Bi-PAP available</li>
+                                <ul>
+                                    <li class="invertible">PEEP 7-10 cm H<sub>2</sub>O</li>
+                                    <li class="invertible">PIP: 12-18 cm H<sub>2</sub>O</li>
+                                </ul>
+                            </ul>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="2">Next<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Severe Distress</h1>
+                        <ul>
+                            <li class="invertible">Patient will be very anxious.</li>
+                            <li class="invertible">Sit on bed with patient. Look at patient directly and tell them they are breathing and you will keep them safe.</li>
+                            <li class="invertible">Start by placing Ambu Bag CPAP on face. Once tolerated, tell patient you are quickly transitioning to BiPap/CPAP mask.</li>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="3">Next<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Severe Distress</h1>
+                        <ul>
+                            <li class="invertible">If obtunded, severely hypoxic or &darr;HR:</li>
+                            <ul>
+                                <li class="invertible">Intubate<img src="assets/icon_intubation.png" class="modalLaunch intubationModalLaunch pointer right"/></li>
+                                <li class="invertible">CBG or ABG via EPOC</li>
+                                <li class="invertible">Use RR 5-15 (need long E time)</li>
+                                <li class="invertible">Liberal sedation and paralysis<img src="assets/icon_intubation.png" class="modalLaunch intubationModalLaunch pointer right"/></li>
+                                <ul>
+                                    <li class="invertible"><img class="infoImg warning" src="assets/icon_warning_dark.png"/>Do not allow spontaneous respiration (high risk of barotrauma)</li>
+                                </ul>
+                                <li class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="4">Continue albuterol/steroids<img class="arrow" src="assets/downarrow.png"/></a></li>
+                            </ul>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Severe Distress</h1>
+                        <ul>
+                            <li class="invertible">Continuous albuterol <img src="./assets/icon_albuterol.png" class="modalLaunch albuterolModalLaunch pointer right"/></li>
+                            <ul>
+                                <li class="invertible">&lt; 10 kg: 10 mg/hr</li>
+                                <li class="invertible">10-20 kg: 15 mg/hr</li>
+                                <li class="invertible">&gt; 20 kg: 20 mg/hr</li>
+                            </ul>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="5">Next<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Severe Distress</h1>
+                        <ul>
+                            <li class="invertible">IV corticosteroids</li>
+                            <ul>
+                                <li class="invertible">Methylprednisolone 2 mg/kg (max 125 mg)</li>
+                                <li class="invertible">OR</li>
+                                <li class="invertible">Dexamethasone 0.6 mg/kg IV (max 10 mg)</li>
+                                <li class="invertible">NOTE: If steroids have already been given orally, consider re-dosing IV as above</li>
+                            </ul>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="6">Next<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Severe Distress</h1>
+                        <ul>
+                            <li class="invertible">Magnesium Sulfate IV x 1</li>
+                            <ul>
+                                <li class="invertible">50 mg/kg (25-100 mg/kg) IV over 20 min (max 2 gm)</li>
+                            </ul>
+                            <li class="invertible">Terbutaline infusion at 1mcg/kg/min <img src="./assets/icon_terbutaline.png" class="modalLaunch terbutalineModalLaunch pointer right"/></li>
+                            <ul>
+                                <li class="invertible">May &uarr; by 0.5 mcg/kg/min q 30 min (max 4 mcg/kg/min)</li>
+                                <li class="invertible">NOTE: Pediatric doses >> adult doses</li>
+                            </ul>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="3" data-vertical="7">Next<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Severe Distress</h1>
+                        <ul>
+                            <li class="invertible">If inadequate chest movement and no improvement in ETCO2, consider:</li>
+                            <ul>
+                                <li class="invertible">Suction ETT</li>
+                                <li class="invertible">Asthma patients can have severe mucus casting</li>
+                                <li class="invertible">Primary objective is adequate oxygenation</li>
+                                <li class="invertible">Ventilation may remain poor after intubation</li>
+                            </ul>
+
+                        </ul>
+                    </section>
+                </section>
+
+                <!--4-->
+                <section>
+                    <section>
+                        <h1>Moderate Distress</h1>
+                        <ul>
+                            <li class="invertible expandable">Infants<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display: none">
+                                <li class="invertible">Softer, shorter cry</li>
+                                <li class="invertible">Difficulty feeding</li>
+                                <li class="invertible">&uarr;RR</li>
+                                <li class="invertible">Accessory muscle use</li>
+                                <li class="invertible">Inspiratory/expiratory wheezes</li>
+                            </ul>
+                            <li class="invertible expandable">Children/Adolescents<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display: none">
+                                <li class="invertible">Prefer sitting upright</li>
+                                <li class="invertible">Short phrases, one word answers</li>
+                                <li class="invertible">Inspiratory/expiratory wheezes</li>
+                            </ul>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="1">Next<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Moderate Distress</h1>
+                        <ul>
+                            <li class="invertible">Place PIV</li>
+                            <ul>
+                                <li class="invertible">May attempt x 3</li>
+                                <li class="invertible">Use IM or SQ meds if IV difficult</li>
+                                <ul>
+                                    <li class="invertible"><img class="infoImg info" src="assets/icon_info_dark.png">Prolonged IV attempts worsen resp. status</li>
+                                </ul>
+                                <li class="invertible">Have IO available</li>
+                            </ul>
+                            <li class="invertible">O<sub>2</sub> to keep sats &ge; 92%</li>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="2">Next<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Moderate Distress</h1>
+                        <ul>
+                            <li class="invertible">High dose inhaled albuterol:</li>
+                            <ul>
+                                <li class="invertible expandable">START WITH:<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                                <ul style="display: none">
+                                    <li class="invertible">If &lt; 30 kg, give 2.5 mg aerosolized albuterol q 10 min x 3 (Combineb ok)</li>
+                                    <li class="invertible">If &ge; 30 kg, give 5 mg aerosolized albuterol q 10 min x 3 (Combineb ok)</li>
+                                </ul>
+                                <li class="invertible expandable">THEN consider: Continuous albuterol <img src="./assets/icon_albuterol.png" class="modalLaunch albuterolModalLaunch pointer right"/><img style="display: none" src="./assets/icon_albuterol.png" class="modalLaunch albuterolModalLaunch pointer right"/><img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                                <ul style="display: none">
+                                    <li class="invertible">If &lt; 10 kg, then 10 mg/hr</li>
+                                    <li class="invertible">If 10-20 kg, then 15 mg/hr</li>
+                                    <li class="invertible">If &gt; 20 kg, then 20 mg/hr</li>
+                                </ul>
+                            </ul>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="3">Next<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Moderate Distress</h1>
+                        <ul>
+                            <li class="invertible expandable">Prefer IV corticosteroids:<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display: none">
+                                <li class="invertible">Methylprednisolone 1 mg/kg IV (max 125 mg) OR</li>
+                                <li class="invertible">Dexamethasone 0.6 mg/kg IV (max 10 mg)</li>
+                                <li class="invertible">If no IV access, may use Prednisone 2 mg/kg  po (max 60 mg) OR Dexamethasone 0.6 mg/kg IM (max 10 mg)</li>
+                            </ul>
+                            <li class="invertible">Ipratropium Bromide (1.5 ml) aerosolized with albuterol</li>
+                            <li class="invertible">NS bolus 20 mL/kg IV</li>
+                            <ul>
+                                <li class="invertible">May repeat x 1 if perfusion poor</li>
+                            </ul>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="4">Next<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Moderate Distress</h1>
+                        <ul>
+                            <li class="invertible">If no improvement in WOB or distress:</li>
+                            <ul>
+                                <li class="invertible">Magnesium Sulfate x 1</li>
+                                <ul>
+                                    <li class="invertible">50 mg/kg (25-100 mg/kg) IV over 20 min (max 2 gm)</li>
+                                </ul>
+                                <li class="invertible">Terbutaline -  0.1 mg/kg sq (max 0.25 mg) q 5' x 3 prn distress</li>
+                                <li class="invertible">LEAST PREFERRED: SQ Epinephrine 0.01 mg/kg (max 0.5 mg)</li>
+                                <ul>
+                                    <li class="invertible">May repeat q 20' x 3 prn distress</li>
+                                    <li class="invertible">NOTE: thigh muscles preferred over arm</li>
+                                </ul>
+                            </ul>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="4" data-vertical="5">If still no improvement in WOB or distress<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Moderate Distress</h1>
+                        <ul>
+                            <li class="invertible">If still no improvement in WOB or distress:</li>
+                            <ul>
+                                <li class="invertible">Terbutaline infusion at 1 mcg/kg/min <img src="./assets/icon_terbutaline.png" class="modalLaunch terbutalineModalLaunch pointer right"/></li>
+                                <ul>
+                                    <li class="invertible">NOTE: Pediatric doses >> recommended adult doses</li>
+                                </ul>
+                                <li class="invertible">Assess for <a class="slideJump invertible" data-horizontal="3" data-vertical="0">IMPENDING RESPIRATORY FAILURE<img class="arrow" src="assets/downarrow.png"/></a></li>
+                            </ul>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--5-->
+                <section>
+                    <section>
+                        <h1>Mild Distress</h1>
+                        <ul>
+                            <li class="invertible">Shortness of breath with activity</li>
+                            <li class="invertible">Able to lie flat</li>
+                            <li class="invertible">Speaks in complete sentences</li>
+                            <li class="invertible">Normal mental status</li>
+                            <li class="invertible">Stranger anxiety</li>
+                            <li class="invertible">Moderate wheezing, mostly expiratory</li>
+                            <li class="invertible">HR usually WNL for age <img src="./assets/icon_heartrate.png" class="modalLaunch heartRateModalLaunch pointer right"/></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Mild Distress</h1>
+                        <ul>
+                            <li class="invertible expandable">Give oxygen to achieve SpO<sub>2</sub> &ge; 92%<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display: none">
+                                <li class="invertible">Nasal cannula O<sub>2</sub> @ 1-3 LPM</li>
+                                <li class="invertible">Simple mask @ 6 LPM minimum</li>
+                            </ul>
+                            <li class="invertible expandable">Inhaled short acting &beta;-agonist<img class="collapsibleIcon" src="./assets/icon_open.png"/><img class="collapsibleIcon" style="display:none" src="./assets/icon_close.png"/></li>
+                            <ul style="display: none">
+                                <li class="invertible">< 30 kg: 2.5 mg aerosolized albuterol</li>
+                                <li class="invertible">> 30 kg: 5 mg aerosolized albuterol</li>
+                                <li class="invertible">May repeat up to 3 times in 1 hour</li>
+                                <li class="invertible">CONSIDER levalbuterol (Xopenex) 0.15 mg/kg (max dose 5 mg) nebulized if strong parental preference </li>
+                            </ul>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="5" data-vertical="2">Next<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Mild Distress</h1>
+                        <ul>
+                            <li class="invertible">Oral systemic steroids</li>
+                            <ul>
+                                <li class="invertible">1 mg/kg Prednisone po (max 60 mg)</li>
+                                <li class="invertible">OR</li>
+                                <li class="invertible">Dexamethasone 0.6 mg/kg po (max 10 mg)</li>
+                            </ul>
+                        </ul>
+                        <ul>
+                            <li class="invertible">If no improvement in WOB or distress go to <a class="slideJump invertible" data-horizontal="4" data-vertical="1">Moderate<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!--6-->
+                <section>
+                    <section>
+                        <h1>Physical Exam</h1>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="6" data-vertical="1">Focused History<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="6" data-vertical="2">Past History<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="6" data-vertical="3">Focused Physical Exam<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                        <h3 class="invertible"><a class="slideJump invertible" data-horizontal="6" data-vertical="4">Labs/Xrays<img class="arrow" src="assets/downarrow.png"/></a></h3>
+                    </section>
+                    <section>
+                        <h1>Focused History</h1>
+                        <ul>
+                            <li class="invertible">Duration of symptoms</li>
+                            <li class="invertible">Preceding illness</li>
+                            <li class="invertible">Trigger</li>
+                            <li class="invertible">Current home treatment/ home meds and effectiveness</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Past History</h1>
+                        <ul>
+                            <li class="invertible">Known asthma</li>
+                            <li class="invertible">Medication/ compliance</li>
+                            <li class="invertible">Number of prior admissions</li>
+                            <li class="invertible">Prior intubation or ICU admission</li>
+                            <li class="invertible">Note: History of intubation or ICU admission is indicator of asthma severity and increased risk of mortality</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Focused Physical Exam</h1>
+                        <ul>
+                            <li class="invertible">Vital signs</li>
+                            <li class="invertible">Note: Slow RR can be ominous sign</li>
+                            <li class="invertible">Work of breathing, aeration, wheezing (Inspiratory and/ or Expiratory)</li>
+                            <li class="invertible">Speech (Full sentences, short phrases, single words)</li>
+                            <li class="invertible">Mental status</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Labs/Xrays</h1>
+                        <ul>
+                            <li class="invertible">Clinical exam overrides labs</li>
+                            <li class="invertible">Blood gas is NOT required for assessment</li>
+                            <li class="invertible">Note: Attempts at obtaining blood gas can exacerbate distress without improving assessment</li>
+                            <li class="invertible">Note: b Normalb  pCO2 with tachypnea is concerning</li>
+                            <li class="invertible"><a class="slideJump invertible" data-horizontal="6" data-vertical="5">Antibiotics<img class="arrow" src="assets/downarrow.png"/></a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Antibiotics</h1>
+                        <ul>
+                            <li class="invertible">If infiltrate on CXR or evidence of sepsis, consider:</li>
+                            <ul>
+                                <li class="invertible">Ceftriaxone 50 mg/kg IVP AND</li>
+                                <li class="invertible">Vancomycin 15 mg/kg IV over 60 min.</li>
+                            </ul>
+                            <li class="invertible">Now continue to: <a class="slideJump invertible" data-horizontal="4" data-vertical="0">Moderate</a> or <a class="slideJump invertible" data-horizontal="5" data-vertical="0">Mild</a></li>
+                        </ul>
+                    </section>
+                </section>
+
+            </div>
+
+            <!--Transport time-->
+            <aside class="transportTimeAside showInProtocol" style="display: none">
+                <span class="timerHeader">Elapsed Transport Time </span><span id="elapsed" class="timerTime invertible"></span>
+            </aside>
+
+            <!--Navigation Arrows-->
+            <aside class="showInProtocol backToTop" style="display: none;">
+                <img class="pointer" src="./assets/icon_backtotop.png"/>
+            </aside>
+
+            <!--Navigation Arrows-->
+            <aside id="controls" class="controls showInProtocol" style="display: none;">
+	            <div class="navigate-left"></div>
+	            <div class="navigate-right"></div>
+	            <div class="navigate-up"></div>
+	            <div class="navigate-down"></div>
+            </aside>
+        </div>
+
+        <div id="albuterolModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="assets/albuterol.png">
+                </div>
+            </div>
+        </div>
+
+        <div id="heartRateModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="assets/heartrate.png">
+                </div>
+            </div>
+        </div>
+
+        <div id="intubationModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="assets/intubation.png">
+                </div>
+            </div>
+        </div>
+
+        <div id="respiratoryModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="assets/respiratory.png">
+                </div>
+            </div>
+        </div>
+
+        <div id="terbutalineModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="assets/terbutaline.png">
+                </div>
+            </div>
+        </div>
+
+        <div id="mildModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+                <h2>Mild</h2>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <ul>
+                        <li>Press OK to be redirected to the physical exam</li>
+                    </ul>
+                    <div class="calculateBtnsDiv">
+                        <div class="regBtn slideJump" data-dismiss="modal" data-horizontal="6" data-vertical="0" style="width:33%">OK</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="moderateModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+                <h2>Moderate</h2>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <ul>
+                        <li>Is the patient stable enough for a physical exam?</li>
+                    </ul>
+                    <div class="calculateBtnsDiv">
+                        <div class="regBtn pull-left calcBtn slideJump" data-horizontal="6" data-vertical="0" data-dismiss="modal" style="width:33%">Yes</div>
+                        <div class="regBtn pull-left calcBtn slideJump" data-horizontal="4" data-vertical="0" data-dismiss="modal" style="width:33%">No</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Calculator-->
+        <div id="calcModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <img data-dismiss="modal" src="./assets/close.png">
+                <h3>Tertabuline Calculator</h3>
+            </div>
+            <div class="modal-body" style="max-height: 550px;">
+                <p style="font-size: 20px;font-weight: 100;text-align: center;float:left">Note: Standard Concentration = 1 mg/mL; 1 vial = 1 mg/mL</p>
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label" for="weight">Weight (kg)</label>
+                        <div class="controls">
+                            <input type="number" id="weight" class="modalInput">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="dose">Dose (mcg/kg/min)</label>
+                        <div class="controls">
+                            <input type="number" id="dose" class="modalInput">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="transportLength">Transport Length (hr)</label>
+                        <div class="controls">
+                            <input type="number" id="transportLength" class="modalInput">
+                        </div>
+                    </div>
+                    <div class="calculateBtnsDiv">
+                        <div id="calculateBtn" class="regBtn pull-left calcBtn">Calculate</div>
+                        <div id="calcClearBtn" class="regBtn pull-left calcBtn">Clear</div>
+                        <div class="regBtn pull-left calcBtn" data-dismiss="modal">Close</div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="rate">Rate (mL/hr)</label>
+                        <div class="controls">
+                            <input type="text" id="rate" class="modalInput" readonly>
+                        </div>
+                        <br>
+                        <label class="control-label" for="totalVolume">Total Volume (mL)</label>
+                        <div class="controls">
+                            <input type="text" id="totalVolume" class="modalInput" readonly>
+                        </div>
+                    </div>
+                    <p style="font-size: 20px;font-weight: 100;text-align: center;float:left">Suggestion: Make enough for a minimum of 4 hours of transport time at 4 mcg/kg/min</p>
+                </form>
+            </div>
+        </div>
+
+        <!--PDF View-->
+        <div class="pdf invertible" style="display:none;">
+            <div class="pseudoSlide pdf">
+                <iframe src="../../CHO/statusAsthmaticusProtocol.pdf"></iframe>
+            </div>
+        </div>
+
+        <!--Help View-->
+        <div class="help invertible" style="display:none">
+            <div class="pseudoSlide">
+                <h1>Help</h1>
+                <h2>Glossary</h2>
+                <ul>
+                    <li class="invertible">VS: Vital Signs</li>
+                    <li class="invertible">WOB: Work of Breathing</li>
+                    <li class="invertible">Neu: Neuro checks</li>
+                </ul>
+                <h2>Tips</h2>
+                <ul>
+                    <li class="invertible">Pressing the "Home" button takes you back to where you were in the algorithm, NOT to the beginning</li>
+                    <li class="invertible"><img src="./assets/icon_heartrate.png" class="modalLaunch heartRateModalLaunch pointer left"/>Touching this icon will bring up a Heart Rate Guide Range</li>
+                    <li class="invertible"><img src="./assets/icon_albuterol.png" class="modalLaunch albuterolModalLaunch pointer left"/>Touching this icon will bring up a Continuous Albuterol Recipe</li>
+                    <li class="invertible"><img src="./assets/icon_intubation.png" class="modalLaunch intubationModalLaunch pointer left"/>Touching this icon will bring up an Intubation - Preferred Drugs chart</li>
+                    <li class="invertible"><img src="./assets/icon_respiratory.png" class="modalLaunch respiratoryModalLaunch pointer left"/>Touching this icon will bring up a Guide for respiratory rules</li>
+                    <li class="invertible"><img src="./assets/icon_terbutaline.png" class="modalLaunch terbutalineModalLaunch pointer left"/>Touching this icon will bring up a Terbutaline Recipe Calculator</li>
+                    <li class="invertible"><img src="./assets/icon_backtotop.png" class="backToTopTip"/>Touching this icon will take you to the top of the column you are currently in</li>
+                    <li class="invertible">Tap the arrows in the lower right corner of the protocol view to move around the pages. Illuminated arrows mean you can touch them to switch pages</li>
+                    <li class="invertible">To scroll through the PDF, first tap it, and then use two fingers to scroll</li>
+                </ul>
+            </div>
+        </div>
+
+        <!--JS declaration-->
+        <script type="text/javascript" src="revealjs/js/reveal.js"></script>
+        <script type="text/javascript" src="countdown/jquery.countdown.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>
